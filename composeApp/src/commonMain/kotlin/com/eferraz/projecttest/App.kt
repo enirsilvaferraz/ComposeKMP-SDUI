@@ -22,28 +22,40 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 
 import composekotlinproject.composeapp.generated.resources.Res
 import composekotlinproject.composeapp.generated.resources.compose_multiplatform
+import io.ktor.client.*
 import kotlinx.coroutines.launch
+import org.koin.compose.KoinApplication
+import org.koin.compose.koinInject
+import org.koin.core.module.dsl.singleOf
+import org.koin.dsl.module
 
 @Composable
 @Preview
 fun App(
     navController: NavHostController = rememberNavController()
 ) {
-    NavHost(
-        navController = navController,
-        startDestination = "home"
+    KoinApplication(
+        application = {
+            modules(appModule)
+        }
     ) {
 
-        composable(route = "home") {
-            HomeScreen(
-                onNavigate = { navController.navigate("secound") }
-            )
-        }
+        NavHost(
+            navController = navController,
+            startDestination = "home"
+        ) {
 
-        composable(route = "secound") {
-            SecoundScreen(
-                onNavigate = { navController.navigateUp() }
-            )
+            composable(route = "home") {
+                HomeScreen(
+                    onNavigate = { navController.navigate("secound") }
+                )
+            }
+
+            composable(route = "secound") {
+                SecoundScreen(
+                    onNavigate = { navController.navigateUp() }
+                )
+            }
         }
     }
 }
@@ -81,6 +93,7 @@ fun HomeScreen(
 
 @Composable
 fun SecoundScreen(
+    ds: DataSourceRemote = koinInject(),
     onNavigate: () -> Unit
 ) {
 
@@ -100,8 +113,7 @@ fun SecoundScreen(
 
             val scope = rememberCoroutineScope()
             scope.launch {
-                val data = DataSourceRemote(createHttpClient()).get()
-                setModels(data)
+                setModels(ds.get())
             }
 
             models?.results?.let {
@@ -116,4 +128,11 @@ fun SecoundScreen(
             }
         }
     }
+}
+
+val appModule = module {
+
+    single { createHttpClient() }
+
+    singleOf(::DataSourceRemote)
 }

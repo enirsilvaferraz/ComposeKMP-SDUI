@@ -33,13 +33,12 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
-
-            implementation(libs.kotlinx.coroutines.android)
             implementation(libs.ktor.client.okhttp)
         }
 
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
+            implementation(libs.stately.common) // needed for koin 4.0.0
         }
 
         commonMain.dependencies {
@@ -57,6 +56,10 @@ kotlin {
             implementation(libs.kotlinx.coroutines.core)
 
             implementation(libs.bundles.ktor)
+
+            implementation(project.dependencies.platform(libs.koin.bom))
+            implementation(libs.bundles.koin)
+
             api(libs.third.party.logging)
         }
     }
