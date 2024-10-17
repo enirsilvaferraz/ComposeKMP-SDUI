@@ -4,6 +4,8 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -14,11 +16,13 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.eferraz.projecttest.network.*
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
 
 import composekotlinproject.composeapp.generated.resources.Res
 import composekotlinproject.composeapp.generated.resources.compose_multiplatform
+import kotlinx.coroutines.launch
 
 @Composable
 @Preview
@@ -83,12 +87,32 @@ fun SecoundScreen(
     MaterialTheme {
 
         Column {
+
             Text("Secound Screen")
 
             Button(
                 onClick = onNavigate
             ) {
                 Text("Click me!")
+            }
+
+            val (models, setModels) = remember { mutableStateOf<PaginationResult<PokemonRef>?>(null) }
+
+            val scope = rememberCoroutineScope()
+            scope.launch {
+                val data = DataSourceRemote(createHttpClient()).get()
+                setModels(data)
+            }
+
+            models?.results?.let {
+
+                LazyColumn {
+
+                    items(it) {
+                        Text(text = it.name)
+                    }
+                }
+
             }
         }
     }
