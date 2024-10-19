@@ -54,6 +54,7 @@ kotlin {
             implementation(libs.androidx.core.ktx)
 
             implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.kotlinx.serialization.json)
 
             implementation(libs.bundles.ktor)
 
