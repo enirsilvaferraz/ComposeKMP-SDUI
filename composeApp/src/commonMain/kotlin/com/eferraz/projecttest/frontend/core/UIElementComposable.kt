@@ -1,14 +1,13 @@
 package com.eferraz.projecttest.frontend.core
 
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.util.fastForEach
 
@@ -27,7 +26,7 @@ internal class UIScaffoldComposable : UIElementComposable<UIScaffold>() {
             modifier = modifier,
             topBar = { component.topBar?.build() },
             content = { component.content.build() },
-            bottomBar = {component.bottonBar?.build()}
+            bottomBar = { component.bottonBar?.build() }
         )
     }
 }
@@ -40,8 +39,10 @@ internal class UILazyColumnComposable : UIElementComposable<UILazyColumn>() {
         LazyColumn(
             modifier = modifier,
             content = {
-                items(component.body) {
-                    it.build()
+                component.body.fastForEach {
+                    item {
+                        it.build()
+                    }
                 }
             }
         )
@@ -82,7 +83,12 @@ internal class UIIconComposable : UIElementComposable<UIIcon>() {
             Icons.Default.Settings.name -> Icons.Default.Settings
             else -> null
         }?.let {
-            Icon(imageVector = it, contentDescription = component.contentDescription)
+
+            Icon(
+                modifier = modifier,
+                imageVector = it,
+                contentDescription = component.contentDescription
+            )
         }
     }
 }
@@ -91,25 +97,20 @@ internal class UIBottomBarComposable : UIElementComposable<UIBottomBar>() {
 
     @Composable
     override fun build(modifier: Modifier, component: UIBottomBar) {
-        BottomAppBar {
+
+        val (selected, setSelected) = remember { mutableStateOf(component.content.first()) }
+
+        BottomAppBar(
+            modifier = modifier
+        ) {
             component.content.fastForEach {
-                it.build()
+                BottomNavigationItem(
+                    selected = it == selected,
+                    icon = { it.icon.build() },
+                    label = { it.label.build() },
+                    onClick = { setSelected(it) }
+                )
             }
-        }
-    }
-}
-
-internal class UIBOttomBarItemComposable: UIElementComposable<UIBottomBarItem>() {
-
-    @Composable
-    override fun build(modifier: Modifier, component: UIBottomBarItem) {
-        Row{
-            BottomNavigationItem(
-                selected = false,
-                icon = {component.icon.build()},
-                label = {component.label.build()},
-                onClick = {}
-            )
         }
     }
 }

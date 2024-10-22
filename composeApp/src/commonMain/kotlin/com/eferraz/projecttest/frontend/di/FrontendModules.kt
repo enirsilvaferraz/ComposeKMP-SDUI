@@ -25,6 +25,8 @@ import kotlin.reflect.KClass
 
 val frontendModule = module {
 
+    factory { Json { serializersModule = sduiPolymorphicComponents() } }
+
     viewModelOf(::SDUIViewModel)
     factoryOf(::GetScreenUseCase)
     factoryOf(::ScreenRepository)
@@ -35,16 +37,12 @@ val frontendModule = module {
     registerComponent(UILazyColumn::class, UILazyColumnComposable())
     registerComponent(UIIcon::class, UIIconComposable())
     registerComponent(UIBottomBar::class, UIBottomBarComposable())
-    registerComponent(UIBottomBarItem::class, UIBOttomBarItemComposable())
-
-
-    factory { Json { serializersModule = sduiPolymorphicComponents() } }
 }
 
 @OptIn(InternalSerializationApi::class, ExperimentalSerializationApi::class)
-private inline fun <reified T : UIElement> Module.registerComponent(
-    clazz: KClass<T>,
-    composable: UIElementComposable<T>
+private inline fun <reified Element : UIElement> Module.registerComponent(
+    clazz: KClass<Element>,
+    composable: UIElementComposable<Element>
 ) {
 
     val name = clazz.serializer().descriptor.serialName

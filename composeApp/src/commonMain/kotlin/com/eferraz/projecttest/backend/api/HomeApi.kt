@@ -32,8 +32,8 @@ private fun PaginationResult<PokemonRef>.toSDUI(): UIElement = UIScaffold(
     content = UILazyColumn(body = this.results.map { UIText(text = it.name) }),
     bottonBar = UIBottomBar(
         content = listOf(
-            UIBottomBarItem(icon = UIIcon(Icons.Default.Home.name), label = UIText ("Home")),
-            UIBottomBarItem(icon = UIIcon(Icons.Default.Settings.name), label = UIText("Settings"))
+            UIBottomBar.UIBottomBarItem(icon = UIIcon(Icons.Default.Home.name), label = UIText ("Home")),
+            UIBottomBar.UIBottomBarItem(icon = UIIcon(Icons.Default.Settings.name), label = UIText("Settings"))
         )
     )
 )
