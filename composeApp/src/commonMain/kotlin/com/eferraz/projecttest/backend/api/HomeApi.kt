@@ -23,5 +23,5 @@ internal class HomeApiImpl(
     }
 }
 
-fun PaginationResult<PokemonRef>.toSDUI() : SDUIComponent = SDUIScreen(body = this.results.map { SDUIText(text = it.name) })
+fun PaginationResult<PokemonRef>.toSDUI() : UIElement = UIScafold(body = this.results.map { UIText(text = it.name) })
 

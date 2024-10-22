@@ -1,7 +1,6 @@
 package com.eferraz.projecttest.frontend
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -10,14 +9,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.eferraz.projecttest.backend.api.SDUIComponent
 import com.eferraz.projecttest.frontend.SDUIViewModel.ScreenState
-import org.koin.compose.koinInject
 import org.koin.compose.viewmodel.koinViewModel
-import org.koin.core.qualifier.named
 
 @Composable
-internal fun SDUIContainer(
+internal fun DefaultScreen(
     vm: SDUIViewModel = koinViewModel()
 ) {
 
@@ -47,8 +43,5 @@ private fun LoadingScreen() {
 private fun SuccessScreen(
     state: ScreenState.Success
 ) {
-
-    Column {
-        koinInject<SDUIComponentComposable<SDUIComponent>>(named(state.screen.getSerialName())).build(state.screen)
-    }
+    state.screen.build()
 }
