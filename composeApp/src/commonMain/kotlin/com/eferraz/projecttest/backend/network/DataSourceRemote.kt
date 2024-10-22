@@ -1,4 +1,4 @@
-package com.eferraz.projecttest.network
+package com.eferraz.projecttest.backend.network
 
 import io.ktor.client.*
 import io.ktor.client.call.*

@@ -1,13 +1,14 @@
 package com.eferraz.projecttest.frontend.di
 
-import com.eferraz.projecttest.backend.api.UIElement
-import com.eferraz.projecttest.backend.api.UIScafold
-import com.eferraz.projecttest.backend.api.UIText
-import com.eferraz.projecttest.frontend.*
-import com.eferraz.projecttest.frontend.SDUIViewModel
-import com.eferraz.projecttest.frontend.UIElementComposable
-import com.eferraz.projecttest.frontend.UIScafoldComposable
-import com.eferraz.projecttest.frontend.UITextComposable
+import com.eferraz.projecttest.frontend.core.UIElement
+import com.eferraz.projecttest.frontend.core.UIScafold
+import com.eferraz.projecttest.frontend.core.UIText
+import com.eferraz.projecttest.frontend.core.SDUIViewModel
+import com.eferraz.projecttest.frontend.core.UIElementComposable
+import com.eferraz.projecttest.frontend.core.UIScafoldComposable
+import com.eferraz.projecttest.frontend.core.UITextComposable
+import com.eferraz.projecttest.frontend.core.GetScreenUseCase
+import com.eferraz.projecttest.frontend.core.ScreenRepository
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.KSerializer

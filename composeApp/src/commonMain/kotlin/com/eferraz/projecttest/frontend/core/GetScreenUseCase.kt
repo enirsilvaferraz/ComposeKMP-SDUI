@@ -1,6 +1,4 @@
-package com.eferraz.projecttest.frontend
-
-import com.eferraz.projecttest.backend.api.UIElement
+package com.eferraz.projecttest.frontend.core
 
 internal class GetScreenUseCase(
     private val repository: ScreenRepository

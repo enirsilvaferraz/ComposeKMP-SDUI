@@ -1,7 +1,6 @@
-package com.eferraz.projecttest.frontend
+package com.eferraz.projecttest.frontend.core
 
-import com.eferraz.projecttest.backend.api.ApiOrchestror
-import com.eferraz.projecttest.backend.api.UIElement
+import com.eferraz.projecttest.backend.ApiOrchestror
 import kotlinx.serialization.json.Json
 
 internal class ScreenRepository(

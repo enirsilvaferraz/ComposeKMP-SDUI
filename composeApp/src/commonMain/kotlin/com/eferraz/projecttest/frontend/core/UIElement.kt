@@ -1,4 +1,4 @@
-package com.eferraz.projecttest.backend.api
+package com.eferraz.projecttest.frontend.core
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

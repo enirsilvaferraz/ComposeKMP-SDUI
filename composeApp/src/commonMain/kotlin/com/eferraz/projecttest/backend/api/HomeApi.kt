@@ -1,14 +1,17 @@
 package com.eferraz.projecttest.backend.api
 
-import com.eferraz.projecttest.network.DataSourceRemote
-import com.eferraz.projecttest.network.PaginationResult
-import com.eferraz.projecttest.network.PokemonRef
+import com.eferraz.projecttest.backend.network.DataSourceRemote
+import com.eferraz.projecttest.backend.network.PaginationResult
+import com.eferraz.projecttest.backend.network.PokemonRef
+import com.eferraz.projecttest.frontend.core.UIElement
+import com.eferraz.projecttest.frontend.core.UIScafold
+import com.eferraz.projecttest.frontend.core.UIText
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-public interface HomeApi {
+internal interface HomeApi {
 
     suspend fun get(): String
 }
@@ -23,5 +26,5 @@ internal class HomeApiImpl(
     }
 }
 
-fun PaginationResult<PokemonRef>.toSDUI() : UIElement = UIScafold(body = this.results.map { UIText(text = it.name) })
+private fun PaginationResult<PokemonRef>.toSDUI() : UIElement = UIScafold(body = this.results.map { UIText(text = it.name) })
 

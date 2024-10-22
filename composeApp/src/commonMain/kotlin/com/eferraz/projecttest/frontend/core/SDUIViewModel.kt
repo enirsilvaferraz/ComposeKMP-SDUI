@@ -1,8 +1,7 @@
-package com.eferraz.projecttest.frontend
+package com.eferraz.projecttest.frontend.core
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.eferraz.projecttest.backend.api.UIElement
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update

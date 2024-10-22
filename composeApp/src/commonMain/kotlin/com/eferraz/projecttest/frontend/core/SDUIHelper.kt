@@ -1,7 +1,6 @@
-package com.eferraz.projecttest.frontend
+package com.eferraz.projecttest.frontend.core
 
 import androidx.compose.runtime.Composable
-import com.eferraz.projecttest.backend.api.UIElement
 import kotlinx.serialization.*
 import org.koin.compose.koinInject
 import org.koin.core.qualifier.named

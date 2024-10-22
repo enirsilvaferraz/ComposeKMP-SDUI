@@ -6,8 +6,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import com.eferraz.projecttest.backend.api.CallBuilder
 import com.eferraz.projecttest.backend.di.backendModule
+import com.eferraz.projecttest.frontend.core.DefaultScreen
 import com.eferraz.projecttest.frontend.di.frontendModule
 import kotlinx.serialization.Serializable
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -34,7 +34,7 @@ fun App() {
 
             composable<NavRoot.Home> {
                 DefaultScreen(
-                    vm = koinViewModel(parameters = { parametersOf(CallBuilder(it.toRoute<NavRoot.Home>().url)) })
+                    vm = koinViewModel(parameters = { parametersOf(it.toRoute<NavRoot.Home>().url) })
                 )
             }
         }
