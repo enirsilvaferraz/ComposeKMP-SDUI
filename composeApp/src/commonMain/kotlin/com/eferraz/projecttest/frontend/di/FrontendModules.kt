@@ -1,14 +1,12 @@
 package com.eferraz.projecttest.frontend.di
 
-import com.eferraz.projecttest.frontend.core.UIElement
-import com.eferraz.projecttest.frontend.core.UIScafold
-import com.eferraz.projecttest.frontend.core.UIText
-import com.eferraz.projecttest.frontend.core.SDUIViewModel
-import com.eferraz.projecttest.frontend.core.UIElementComposable
-import com.eferraz.projecttest.frontend.core.UIScafoldComposable
-import com.eferraz.projecttest.frontend.core.UITextComposable
+import com.eferraz.projecttest.frontend.core.*
 import com.eferraz.projecttest.frontend.core.GetScreenUseCase
+import com.eferraz.projecttest.frontend.core.SDUIViewModel
 import com.eferraz.projecttest.frontend.core.ScreenRepository
+import com.eferraz.projecttest.frontend.core.UIElementComposable
+import com.eferraz.projecttest.frontend.core.UIScaffoldComposable
+import com.eferraz.projecttest.frontend.core.UITextComposable
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.KSerializer
@@ -31,8 +29,14 @@ val frontendModule = module {
     factoryOf(::GetScreenUseCase)
     factoryOf(::ScreenRepository)
 
-    registerComponent(UIScafold::class, UIScafoldComposable())
+    registerComponent(UIScaffold::class, UIScaffoldComposable())
     registerComponent(UIText::class, UITextComposable())
+    registerComponent(UITopBar::class, UITopBarComposable())
+    registerComponent(UILazyColumn::class, UILazyColumnComposable())
+    registerComponent(UIIcon::class, UIIconComposable())
+    registerComponent(UIBottomBar::class, UIBottomBarComposable())
+    registerComponent(UIBottomBarItem::class, UIBOttomBarItemComposable())
+
 
     factory { Json { serializersModule = sduiPolymorphicComponents() } }
 }

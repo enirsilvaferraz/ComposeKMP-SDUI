@@ -9,4 +9,4 @@ import org.koin.core.qualifier.named
 inline fun <reified T: UIElement> T.serial() : String = this::class.serializer().descriptor.serialName
 
 @Composable
-internal inline fun <reified T : UIElement> T.build() = koinInject<UIElementComposable<UIElement>>(named(this.serial())).build(this)
+internal inline fun <reified T : UIElement> T.build() = koinInject<UIElementComposable<UIElement>>(named(this.serial())).build(component =this)

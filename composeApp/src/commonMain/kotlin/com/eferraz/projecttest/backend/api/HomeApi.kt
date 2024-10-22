@@ -1,11 +1,12 @@
 package com.eferraz.projecttest.backend.api
 
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Settings
 import com.eferraz.projecttest.backend.network.DataSourceRemote
 import com.eferraz.projecttest.backend.network.PaginationResult
 import com.eferraz.projecttest.backend.network.PokemonRef
-import com.eferraz.projecttest.frontend.core.UIElement
-import com.eferraz.projecttest.frontend.core.UIScafold
-import com.eferraz.projecttest.frontend.core.UIText
+import com.eferraz.projecttest.frontend.core.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
@@ -18,7 +19,7 @@ internal interface HomeApi {
 
 internal class HomeApiImpl(
     private val ds: DataSourceRemote,
-    private val json: Json
+    private val json: Json,
 ) : HomeApi {
 
     override suspend fun get() = withContext(Dispatchers.Default) {
@@ -26,5 +27,13 @@ internal class HomeApiImpl(
     }
 }
 
-private fun PaginationResult<PokemonRef>.toSDUI() : UIElement = UIScafold(body = this.results.map { UIText(text = it.name) })
-
+private fun PaginationResult<PokemonRef>.toSDUI(): UIElement = UIScaffold(
+    topBar = UITopBar(title = UIText(text = "Home")),
+    content = UILazyColumn(body = this.results.map { UIText(text = it.name) }),
+    bottonBar = UIBottomBar(
+        content = listOf(
+            UIBottomBarItem(icon = UIIcon(Icons.Default.Home.name), label = UIText ("Home")),
+            UIBottomBarItem(icon = UIIcon(Icons.Default.Settings.name), label = UIText("Settings"))
+        )
+    )
+)
