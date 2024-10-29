@@ -9,6 +9,7 @@ internal class ApiOrchestror(
 
     suspend fun get(): String = when (url) {
         "/home" -> homeApi.get()
+        "/settings" -> homeApi.get()
         else -> throw IllegalArgumentException("URL not found!")
     }
 }

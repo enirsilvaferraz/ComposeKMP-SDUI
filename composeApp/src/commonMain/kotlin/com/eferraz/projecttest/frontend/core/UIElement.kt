@@ -1,5 +1,6 @@
 package com.eferraz.projecttest.frontend.core
 
+import com.eferraz.projecttest.frontend.NavRoot
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -33,10 +34,14 @@ data class UIIcon(val icon: String, val contentDescription: String = "") : UIEle
 
 @Serializable
 @SerialName("ui-botton-bar")
-data class UIBottomBar(val content: List<UIBottomBarItem>) : UIElement() {
+data class UIBottomBar(val content: List<Item>) : UIElement() {
 
     @Serializable
-    data class UIBottomBarItem(val icon: UIIcon, val label: UIElement)
+    data class Item(val icon: UIIcon, val label: UIElement, val onClick: UIAction)
 }
+
+@Serializable
+@SerialName("ui-horizontal-pager")
+data class UIHorizontalPager(val pages: List<UIElement>) : UIElement()
 
 

@@ -37,6 +37,10 @@ val frontendModule = module {
     registerComponent(UILazyColumn::class, UILazyColumnComposable())
     registerComponent(UIIcon::class, UIIconComposable())
     registerComponent(UIBottomBar::class, UIBottomBarComposable())
+    registerComponent(UIHorizontalPager::class, UIHorizontalPagerComposable())
+
+    registerComponent(UINavigation::class, UINavigationBehavior())
+    registerComponent(UIChangePage::class, UIChangePageBehavior())
 }
 
 @OptIn(InternalSerializationApi::class, ExperimentalSerializationApi::class)
@@ -47,13 +51,28 @@ private inline fun <reified Element : UIElement> Module.registerComponent(
 
     val name = clazz.serializer().descriptor.serialName
     factory(named(name)) { composable } bind UIElementComposable::class
-    factory(named(name)) { SDUIComponentRegister(actual = clazz, serializer = clazz.serializer()) }
+    factory(named(name)) { SDUIElementRegister(actual = clazz, serializer = clazz.serializer()) }
 }
 
-private data class SDUIComponentRegister<T : UIElement>(val actual: KClass<T>, val serializer: KSerializer<T>)
+@OptIn(InternalSerializationApi::class, ExperimentalSerializationApi::class)
+private inline fun <reified Action : UIAction> Module.registerComponent(
+    clazz: KClass<Action>,
+    composable: UIActionBehavior<Action>
+) {
+
+    val name = clazz.serializer().descriptor.serialName
+    factory(named(name)) { composable } bind UIActionBehavior::class
+    factory(named(name)) { SDUIActionRegister(actual = clazz, serializer = clazz.serializer()) }
+}
+
+private data class SDUIElementRegister<T : UIElement>(val actual: KClass<T>, val serializer: KSerializer<T>)
+private data class SDUIActionRegister<T : UIAction>(val actual: KClass<T>, val serializer: KSerializer<T>)
 
 private fun Scope.sduiPolymorphicComponents() = SerializersModule {
-    getAll<SDUIComponentRegister<UIElement>>().forEach {
+    getAll<SDUIElementRegister<UIElement>>().forEach {
         polymorphic(UIElement::class, it.actual, it.serializer)
+    }
+    getAll<SDUIActionRegister<UIAction>>().forEach {
+        polymorphic(UIAction::class, it.actual, it.serializer)
     }
 }

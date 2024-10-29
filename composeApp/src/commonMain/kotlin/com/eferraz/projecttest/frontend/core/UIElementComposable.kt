@@ -1,26 +1,28 @@
 package com.eferraz.projecttest.frontend.core
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.util.fastForEach
+import com.eferraz.projecttest.frontend.SDUIContainerScope
 
 internal abstract class UIElementComposable<Element : UIElement> {
 
     @Composable
-    abstract fun build(modifier: Modifier = Modifier, component: Element)
+    abstract fun SDUIContainerScope.build(modifier: Modifier = Modifier, component: Element)
 }
 
 internal class UIScaffoldComposable : UIElementComposable<UIScaffold>() {
 
     @Composable
-    override fun build(modifier: Modifier, component: UIScaffold) {
+    override fun SDUIContainerScope.build(modifier: Modifier, component: UIScaffold) {
 
         Scaffold(
             modifier = modifier,
@@ -34,7 +36,7 @@ internal class UIScaffoldComposable : UIElementComposable<UIScaffold>() {
 internal class UILazyColumnComposable : UIElementComposable<UILazyColumn>() {
 
     @Composable
-    override fun build(modifier: Modifier, component: UILazyColumn) {
+    override fun SDUIContainerScope.build(modifier: Modifier, component: UILazyColumn) {
 
         LazyColumn(
             modifier = modifier,
@@ -52,7 +54,7 @@ internal class UILazyColumnComposable : UIElementComposable<UILazyColumn>() {
 internal class UITopBarComposable : UIElementComposable<UITopBar>() {
 
     @Composable
-    override fun build(modifier: Modifier, component: UITopBar) {
+    override fun SDUIContainerScope.build(modifier: Modifier, component: UITopBar) {
 
         TopAppBar(
             modifier = modifier,
@@ -64,7 +66,7 @@ internal class UITopBarComposable : UIElementComposable<UITopBar>() {
 internal class UITextComposable : UIElementComposable<UIText>() {
 
     @Composable
-    override fun build(modifier: Modifier, component: UIText) {
+    override fun SDUIContainerScope.build(modifier: Modifier, component: UIText) {
 
         Text(
             modifier = modifier,
@@ -76,7 +78,7 @@ internal class UITextComposable : UIElementComposable<UIText>() {
 internal class UIIconComposable : UIElementComposable<UIIcon>() {
 
     @Composable
-    override fun build(modifier: Modifier, component: UIIcon) {
+    override fun SDUIContainerScope.build(modifier: Modifier, component: UIIcon) {
 
         when (component.icon) {
             Icons.Default.Home.name -> Icons.Default.Home
@@ -95,22 +97,39 @@ internal class UIIconComposable : UIElementComposable<UIIcon>() {
 
 internal class UIBottomBarComposable : UIElementComposable<UIBottomBar>() {
 
+    @OptIn(ExperimentalFoundationApi::class)
     @Composable
-    override fun build(modifier: Modifier, component: UIBottomBar) {
+    override fun SDUIContainerScope.build(modifier: Modifier, component: UIBottomBar) {
 
-        val (selected, setSelected) = remember { mutableStateOf(component.content.first()) }
-
-        BottomAppBar(
-            modifier = modifier
-        ) {
-            component.content.fastForEach {
+        BottomAppBar(modifier = modifier) {
+            component.content.forEachIndexed { index, item ->
                 BottomNavigationItem(
-                    selected = it == selected,
-                    icon = { it.icon.build() },
-                    label = { it.label.build() },
-                    onClick = { setSelected(it) }
+                    selected = index == pagerState.value?.currentPage,
+                    icon = { item.icon.build() },
+                    label = { item.label.build() },
+                    onClick = { item.onClick.build() }
                 )
             }
         }
+    }
+}
+
+internal class UIHorizontalPagerComposable : UIElementComposable<UIHorizontalPager>() {
+
+    @OptIn(ExperimentalFoundationApi::class)
+    @Composable
+    override fun SDUIContainerScope.build(modifier: Modifier, component: UIHorizontalPager) {
+
+        val state = rememberPagerState(initialPage = 0, pageCount = { component.pages.size }).also {
+            pagerState.value = it
+        }
+
+        HorizontalPager(
+            modifier = modifier,
+            state = state,
+            pageContent = {
+                component.pages[it].build()
+            }
+        )
     }
 }
