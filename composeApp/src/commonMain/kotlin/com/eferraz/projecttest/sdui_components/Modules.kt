@@ -12,6 +12,8 @@ val componentModule = module {
     registerComponent(UIIcon::class, UIIconComposable())
     registerComponent(UIBottomBar::class, UIBottomBarComposable())
     registerComponent(UIHorizontalPager::class, UIHorizontalPagerComposable())
+    registerComponent(UIRow::class, UIRowComposable())
+    registerComponent(UIImage::class, UIImageComposable())
 
     registerComponent(UINavigation::class, UINavigationBehavior())
     registerComponent(UIChangePage::class, UIChangePageBehavior())

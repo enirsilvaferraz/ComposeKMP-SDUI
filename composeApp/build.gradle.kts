@@ -61,6 +61,9 @@ kotlin {
             implementation(project.dependencies.platform(libs.koin.bom))
             implementation(libs.bundles.koin)
 
+            implementation(project.dependencies.platform(libs.coil.bom))
+            implementation(libs.bundles.coil)
+
             api(libs.third.party.logging)
         }
     }

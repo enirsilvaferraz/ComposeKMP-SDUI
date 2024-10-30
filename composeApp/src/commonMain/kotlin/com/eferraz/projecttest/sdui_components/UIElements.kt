@@ -43,3 +43,16 @@ data class UIBottomBar(val content: List<Item>) : UIElement() {
 data class UIHorizontalPager(val pages: List<UIElement>) : UIElement()
 
 
+@Serializable
+@SerialName("ui-row")
+data class UIRow(val pages: List<UIElement>) : UIElement()
+
+
+@Serializable
+@SerialName("ui-image")
+data class UIImage(val url: String, val contentDescription: String) : UIElement()
+
+
+
+
+

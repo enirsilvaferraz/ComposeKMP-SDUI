@@ -15,6 +15,7 @@ logging_version = "1.5.0"
 koin-bom = "4.0.0-RC1" # 4.0.0 nao esta funcionando corretamente
 statelyCommon = "2.1.0"
 kotlinx-serialization = "1.7.3"
+coil3 = "3.0.0-rc02"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidx-core-ktx" }
@@ -44,6 +45,11 @@ stately-common = { module = "co.touchlab:stately-common", version.ref = "stately
 
 third-party-logging = { module = "org.lighthousegames:logging", version.ref = "logging_version" }
 
+# Coil
+coil-bom = { module = "io.coil-kt.coil3:coil-bom", version.ref = "coil3" }
+coil-compose = { module = "io.coil-kt.coil3:coil-compose"}
+coil-network-ktor = { module = "io.coil-kt.coil3:coil-network-ktor3"}
+
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
@@ -65,4 +71,9 @@ koin = [
     "koin-compose",
     "koin-compose-viewmodel",
     "koin-core-viewmodel"
+]
+
+coil = [
+    "coil-compose",
+    "coil-network-ktor"
 ]

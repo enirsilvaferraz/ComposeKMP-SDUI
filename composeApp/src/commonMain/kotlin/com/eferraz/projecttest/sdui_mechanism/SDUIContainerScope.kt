@@ -28,6 +28,10 @@ internal class SDUIContainerScope @OptIn(ExperimentalFoundationApi::class) priva
         }
     }
 
+    @Composable
+    internal inline fun <reified Element : UIElement> List<Element>.build() {
+        this.map { it.build() }
+    }
 
     internal inline fun <reified Action : UIAction> Action.build() {
         with(get<UIActionBehavior<Action>>(named(this@build.serial()))) {

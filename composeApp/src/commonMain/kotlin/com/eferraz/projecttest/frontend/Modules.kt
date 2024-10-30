@@ -1,4 +1,4 @@
-package com.eferraz.projecttest.frontend.di
+package com.eferraz.projecttest.frontend
 
 import com.eferraz.projecttest.sdui_mechanism.sduiPolymorphicComponents
 import kotlinx.serialization.json.Json

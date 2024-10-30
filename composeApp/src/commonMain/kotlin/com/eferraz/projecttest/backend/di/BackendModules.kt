@@ -3,7 +3,7 @@ package com.eferraz.projecttest.backend.di
 import com.eferraz.projecttest.backend.api.HomeApi
 import com.eferraz.projecttest.backend.api.HomeApiImpl
 import com.eferraz.projecttest.backend.ApiOrchestror
-import com.eferraz.projecttest.backend.network.DataSourceRemote
+import com.eferraz.projecttest.backend.network.PokemonDataSourceRemote
 import com.eferraz.projecttest.backend.network.createHttpClient
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
@@ -19,5 +19,5 @@ val backendModule = module {
 
     singleOf(::HomeApiImpl) bind HomeApi::class
     
-    singleOf(::DataSourceRemote)
+    singleOf(::PokemonDataSourceRemote)
 }
