@@ -1,6 +1,7 @@
-package com.eferraz.projecttest.frontend.core
+package com.eferraz.projecttest.sdui_solution
 
 import com.eferraz.projecttest.backend.ApiOrchestror
+import com.eferraz.projecttest.sdui_mechanism.UIElement
 import kotlinx.serialization.json.Json
 
 internal class ScreenRepository(

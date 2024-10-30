@@ -1,4 +1,4 @@
-package com.eferraz.projecttest.frontend.core
+package com.eferraz.projecttest.sdui_components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.lazy.LazyColumn
@@ -11,13 +11,8 @@ import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.util.fastForEach
-import com.eferraz.projecttest.frontend.SDUIContainerScope
-
-internal abstract class UIElementComposable<Element : UIElement> {
-
-    @Composable
-    abstract fun SDUIContainerScope.build(modifier: Modifier = Modifier, component: Element)
-}
+import com.eferraz.projecttest.sdui_mechanism.SDUIContainerScope
+import com.eferraz.projecttest.sdui_mechanism.UIElementComposable
 
 internal class UIScaffoldComposable : UIElementComposable<UIScaffold>() {
 

@@ -1,7 +1,8 @@
-package com.eferraz.projecttest.frontend.core
+package com.eferraz.projecttest.sdui_solution
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.eferraz.projecttest.sdui_mechanism.UIElement
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update

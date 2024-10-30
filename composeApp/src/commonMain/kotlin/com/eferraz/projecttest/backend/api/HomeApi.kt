@@ -6,8 +6,9 @@ import androidx.compose.material.icons.filled.Settings
 import com.eferraz.projecttest.backend.network.DataSourceRemote
 import com.eferraz.projecttest.backend.network.PaginationResult
 import com.eferraz.projecttest.backend.network.PokemonRef
-import com.eferraz.projecttest.frontend.NavRoot
-import com.eferraz.projecttest.frontend.core.*
+import com.eferraz.projecttest.sdui_components.*
+import com.eferraz.projecttest.sdui_components.UIChangePage
+import com.eferraz.projecttest.sdui_mechanism.UIElement
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString

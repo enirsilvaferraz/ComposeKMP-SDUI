@@ -1,11 +1,9 @@
-package com.eferraz.projecttest.frontend.core
+package com.eferraz.projecttest.sdui_components
 
-import com.eferraz.projecttest.frontend.NavRoot
+import com.eferraz.projecttest.sdui_mechanism.UIAction
+import com.eferraz.projecttest.sdui_mechanism.UIElement
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-
-@Serializable
-abstract class UIElement
 
 @Serializable
 @SerialName("ui-scafold")

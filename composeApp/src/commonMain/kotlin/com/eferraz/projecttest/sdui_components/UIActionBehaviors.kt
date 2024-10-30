@@ -1,12 +1,9 @@
-package com.eferraz.projecttest.frontend.core
+package com.eferraz.projecttest.sdui_components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import com.eferraz.projecttest.frontend.SDUIContainerScope
+import com.eferraz.projecttest.sdui_mechanism.SDUIContainerScope
+import com.eferraz.projecttest.sdui_mechanism.UIActionBehavior
 import kotlinx.coroutines.launch
-
-internal abstract class UIActionBehavior<Action : UIAction> {
-    abstract fun SDUIContainerScope.build(action: Action)
-}
 
 
 internal class UINavigationBehavior : UIActionBehavior<UINavigation>() {
