@@ -1,5 +1,6 @@
 package com.eferraz.projecttest.backend.network
 
+import com.eferraz.projecttest.backend.Pokemon
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*
@@ -12,11 +13,19 @@ class PokemonDataSourceRemote(
 
     suspend fun pokemons() = httpClient.get(
         urlString = "https://pokeapi.co/api/v2/pokemon/"
-    ).body<PaginationResult<PokemonRef>>()
+    ).body<PaginationResult<ResourceRef>>()
 
-    suspend fun pokemon(name:String) = httpClient.get(
+    suspend fun pokemon(name: String) = httpClient.get(
         urlString = "https://pokeapi.co/api/v2/pokemon/$name"
-    ).body<PokemonDetail>()
+    ).body<Pokemon>()
+
+    suspend fun types() = httpClient.get(
+        urlString = "https://pokeapi.co/api/v2/type/"
+    ).body<PaginationResult<ResourceRef>>()
+
+    suspend fun type(name: String) = httpClient.get(
+        urlString = "https://pokeapi.co/api/v2/type/$name"
+    ).body<PokemonType>()
 }
 
 @Serializable
@@ -28,7 +37,7 @@ data class PaginationResult<T>(
 )
 
 @Serializable
-data class PokemonRef(
+data class ResourceRef(
     val name: String,
     val url: String
 )
@@ -43,6 +52,20 @@ data class PokemonDetail(
     @Serializable
     data class Sprites(
         @SerialName("front_default")
-        val frontDefault: String
+        val frontDefault: String?
     )
 }
+
+@Serializable
+data class PokemonType(
+    val id: Int,
+    val name: String,
+    val pokemon: List<PokemonSlot>
+)
+
+
+@Serializable
+data class PokemonSlot(
+    val slot: Int,
+    val pokemon: ResourceRef
+)
