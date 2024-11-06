@@ -2,7 +2,7 @@ package com.eferraz.projecttest.backend
 
 import com.eferraz.projecttest.backend.api.HomeApi
 
-internal class ApiOrchestror(
+ class ApiOrchestror(
     private val url: String,
     private val homeApi: HomeApi
 ) {

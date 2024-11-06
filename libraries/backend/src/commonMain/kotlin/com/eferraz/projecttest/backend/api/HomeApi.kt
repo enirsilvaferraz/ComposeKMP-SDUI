@@ -16,7 +16,7 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-internal interface HomeApi {
+ interface HomeApi {
 
     suspend fun get(): String
 }

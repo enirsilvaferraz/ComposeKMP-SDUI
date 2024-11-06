@@ -9,6 +9,7 @@ import com.eferraz.projecttest.backend.datasources.local.room.RoomDatabaseFactor
 import com.eferraz.projecttest.backend.datasources.remote.PokemonDataSourceRemote
 import com.eferraz.projecttest.backend.datasources.remote.ktor.NetworkFactory
 import com.eferraz.projecttest.backend.repository.PokemonRepository
+import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
@@ -19,7 +20,7 @@ val backendModule = module {
     /*
      * Internal Configurations
      */
-
+    includes(platformBackendModule)
     single { NetworkFactory().build() }
     single { RoomDatabaseFactory(get()).build() }
 
@@ -48,3 +49,5 @@ val backendModule = module {
 
     singleOf(::ApiOrchestror)
 }
+
+expect val platformBackendModule: Module

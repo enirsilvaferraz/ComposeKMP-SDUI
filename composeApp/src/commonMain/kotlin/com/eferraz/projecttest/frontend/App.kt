@@ -10,13 +10,11 @@ import coil3.request.CachePolicy
 import coil3.request.crossfade
 import coil3.util.DebugLogger
 import com.eferraz.projecttest.backend.di.backendModule
-import com.eferraz.projecttest.platformModule
 import com.eferraz.projecttest.sdui_components.componentModule
 import com.eferraz.projecttest.sdui_solution.DefaultScreen
 import com.eferraz.projecttest.sdui_solution.solutionModule
 import kotlinx.serialization.Serializable
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import org.koin.compose.KoinApplication
 import org.koin.compose.KoinContext
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.context.startKoin
@@ -51,6 +49,6 @@ fun getAsyncImageLoader(context: PlatformContext) =
 fun initKoin(config: KoinAppDeclaration? = null) {
     startKoin {
         config?.invoke(this)
-        modules(backendModule, frontendModule, componentModule, solutionModule, platformModule)
+        modules(backendModule, frontendModule, componentModule, solutionModule)
     }
 }
