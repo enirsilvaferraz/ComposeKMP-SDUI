@@ -4,7 +4,7 @@ android-compileSdk = "35"
 android-minSdk = "24"
 android-targetSdk = "35"
 
-agp = "8.5.0"
+agp = "8.8.0-alpha08"
 compose-plugin = "1.6.11"
 kotlin = "2.0.21"
 
