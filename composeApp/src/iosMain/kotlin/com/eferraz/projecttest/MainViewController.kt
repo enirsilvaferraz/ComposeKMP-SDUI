@@ -5,7 +5,7 @@ import com.eferraz.projecttest.frontend.App
 import com.eferraz.projecttest.frontend.initKoin
 
 fun MainViewController() = ComposeUIViewController(
-    configure ={
+    configure = {
         initKoin()
     }
 ) {

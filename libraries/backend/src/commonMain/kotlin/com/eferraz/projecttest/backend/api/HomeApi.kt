@@ -27,7 +27,7 @@ internal class HomeApiImpl(
 ) : HomeApi {
 
     override suspend fun get() = withContext(Dispatchers.Default) {
-        json.encodeToString(ds.get(0, 50).toSDUI())
+        json.encodeToString(ds.get(0, 55).toSDUI())
     }
 }
 
