@@ -1,19 +1,15 @@
 package com.eferraz.projecttest
 
-import org.koin.core.module.Module
-import org.koin.dsl.module
-import platform.UIKit.UIDevice
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.sqlite.driver.bundled.BundledSQLiteDriver
-import com.eferraz.projecttest.backend.repository.AppDatabase
+import com.eferraz.projecttest.backend.datasources.local.room.AppDatabase
 import kotlinx.cinterop.ExperimentalForeignApi
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
+import org.koin.core.module.Module
+import org.koin.dsl.module
 import platform.Foundation.NSDocumentDirectory
 import platform.Foundation.NSFileManager
-import platform.Foundation.NSHomeDirectory // This shall too in Windows.
 import platform.Foundation.NSUserDomainMask
+import platform.UIKit.UIDevice
 
 fun getUserDatabase(): RoomDatabase.Builder<AppDatabase> {
     val dbFilePath = documentDirectory() + "/my_room.db"

@@ -1,5 +1,6 @@
 package com.eferraz.projecttest.sdui_components
 
+import androidx.compose.ui.Alignment
 import com.eferraz.projecttest.sdui_mechanism.UIAction
 import com.eferraz.projecttest.sdui_mechanism.UIElement
 import kotlinx.serialization.SerialName
@@ -45,8 +46,17 @@ data class UIHorizontalPager(val pages: List<UIElement>) : UIElement()
 
 @Serializable
 @SerialName("ui-row")
-data class UIRow(val pages: List<UIElement>) : UIElement()
+data class UIRow(
+    val verticalAlignment: VerticalAlignment,
+    val content: List<UIElement>
+) : UIElement() {
 
+    enum class VerticalAlignment(val alignment: Alignment.Vertical) {
+        TOP (Alignment.Top),
+        CENTER_VERTICALLY (Alignment.CenterVertically),
+        BOTTOM (Alignment.Bottom);
+    }
+}
 
 @Serializable
 @SerialName("ui-image")

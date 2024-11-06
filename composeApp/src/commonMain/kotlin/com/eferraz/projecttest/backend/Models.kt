@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Pokemon(
+internal data class Pokemon(
     val id: Long,
     val name: String,
     @SerialName("base_experience")
@@ -33,7 +33,7 @@ data class Pokemon(
 )
 
 @Serializable
-data class Ability(
+internal data class Ability(
     @SerialName("is_hidden")
     val isHidden: Boolean,
     val slot: Long,
@@ -41,70 +41,70 @@ data class Ability(
 )
 
 @Serializable
-data class Ability2(
+internal data class Ability2(
     val name: String,
     val url: String,
 )
 
 @Serializable
-data class Form(
+internal data class Form(
     val name: String,
     val url: String,
 )
 
 @Serializable
-data class Index(
+internal data class Index(
     @SerialName("game_index")
     val gameIndex: Long,
     val version: Version,
 )
 
 @Serializable
-data class Version(
+internal data class Version(
     val name: String,
     val url: String,
 )
 
 @Serializable
-data class HeldItem(
+internal data class HeldItem(
     val item: Item,
     @SerialName("version_details")
     val versionDetails: List<VersionDetail>,
 )
 
 @Serializable
-data class Item(
+internal data class Item(
     val name: String,
     val url: String,
 )
 
 @Serializable
-data class VersionDetail(
+internal data class VersionDetail(
     val rarity: Long,
     val version: Version2,
 )
 
 @Serializable
-data class Version2(
+internal data class Version2(
     val name: String,
     val url: String,
 )
 
 @Serializable
-data class Mfe(
+internal data class Mfe(
     val move: Move,
     @SerialName("version_group_details")
     val versionGroupDetails: List<VersionGroupDetail>,
 )
 
 @Serializable
-data class Move(
+internal data class Move(
     val name: String,
     val url: String,
 )
 
 @Serializable
-data class VersionGroupDetail(
+internal data class VersionGroupDetail(
     @SerialName("level_learned_at")
     val levelLearnedAt: Long,
     @SerialName("version_group")
@@ -114,25 +114,25 @@ data class VersionGroupDetail(
 )
 
 @Serializable
-data class VersionGroup(
+internal data class VersionGroup(
     val name: String,
     val url: String,
 )
 
 @Serializable
-data class MoveLearnMethod(
+internal data class MoveLearnMethod(
     val name: String,
     val url: String,
 )
 
 @Serializable
-data class Species(
+internal data class Species(
     val name: String,
     val url: String,
 )
 
 @Serializable
-data class Sprites(
+internal data class Sprites(
     @SerialName("back_default")
     val backDefault: String,
     @SerialName("back_female")
@@ -154,7 +154,7 @@ data class Sprites(
 )
 
 @Serializable
-data class Other(
+internal data class Other(
     @SerialName("dream_world")
     val dreamWorld: DreamWorld,
     val home: Home,
@@ -164,7 +164,7 @@ data class Other(
 )
 
 @Serializable
-data class DreamWorld(
+internal data class DreamWorld(
     @SerialName("front_default")
     val frontDefault: String,
     @SerialName("front_female")
@@ -172,7 +172,7 @@ data class DreamWorld(
 )
 
 @Serializable
-data class Home(
+internal data class Home(
     @SerialName("front_default")
     val frontDefault: String,
     @SerialName("front_female")
@@ -184,7 +184,7 @@ data class Home(
 )
 
 @Serializable
-data class OfficialArtwork(
+internal data class OfficialArtwork(
     @SerialName("front_default")
     val frontDefault: String,
     @SerialName("front_shiny")
@@ -192,7 +192,7 @@ data class OfficialArtwork(
 )
 
 @Serializable
-data class Showdown(
+internal data class Showdown(
     @SerialName("back_default")
     val backDefault: String,
     @SerialName("back_female")
@@ -212,7 +212,7 @@ data class Showdown(
 )
 
 @Serializable
-data class Versions(
+internal data class Versions(
     @SerialName("generation-i")
     val generationI: GenerationI,
     @SerialName("generation-ii")
@@ -232,14 +232,14 @@ data class Versions(
 )
 
 @Serializable
-data class GenerationI(
+internal data class GenerationI(
     @SerialName("red-blue")
     val redBlue: RedBlue,
     val yellow: Yellow,
 )
 
 @Serializable
-data class RedBlue(
+internal data class RedBlue(
     @SerialName("back_default")
     val backDefault: String,
     @SerialName("back_gray")
@@ -251,7 +251,7 @@ data class RedBlue(
 )
 
 @Serializable
-data class Yellow(
+internal data class Yellow(
     @SerialName("back_default")
     val backDefault: String,
     @SerialName("back_gray")
@@ -263,14 +263,14 @@ data class Yellow(
 )
 
 @Serializable
-data class GenerationIi(
+internal data class GenerationIi(
     val crystal: Crystal,
     val gold: Gold,
     val silver: Silver,
 )
 
 @Serializable
-data class Crystal(
+internal data class Crystal(
     @SerialName("back_default")
     val backDefault: String,
     @SerialName("back_shiny")
@@ -282,7 +282,7 @@ data class Crystal(
 )
 
 @Serializable
-data class Gold(
+internal data class Gold(
     @SerialName("back_default")
     val backDefault: String,
     @SerialName("back_shiny")
@@ -294,7 +294,7 @@ data class Gold(
 )
 
 @Serializable
-data class Silver(
+internal data class Silver(
     @SerialName("back_default")
     val backDefault: String,
     @SerialName("back_shiny")
@@ -306,7 +306,7 @@ data class Silver(
 )
 
 @Serializable
-data class GenerationIii(
+internal data class GenerationIii(
     val emerald: Emerald,
     @SerialName("firered-leafgreen")
     val fireredLeafgreen: FireredLeafgreen,
@@ -315,7 +315,7 @@ data class GenerationIii(
 )
 
 @Serializable
-data class Emerald(
+internal data class Emerald(
     @SerialName("front_default")
     val frontDefault: String,
     @SerialName("front_shiny")
@@ -323,7 +323,7 @@ data class Emerald(
 )
 
 @Serializable
-data class FireredLeafgreen(
+internal data class FireredLeafgreen(
     @SerialName("back_default")
     val backDefault: String,
     @SerialName("back_shiny")
@@ -335,7 +335,7 @@ data class FireredLeafgreen(
 )
 
 @Serializable
-data class RubySapphire(
+internal data class RubySapphire(
     @SerialName("back_default")
     val backDefault: String,
     @SerialName("back_shiny")
@@ -347,7 +347,7 @@ data class RubySapphire(
 )
 
 @Serializable
-data class GenerationIv(
+internal data class GenerationIv(
     @SerialName("diamond-pearl")
     val diamondPearl: DiamondPearl,
     @SerialName("heartgold-soulsilver")
@@ -356,7 +356,7 @@ data class GenerationIv(
 )
 
 @Serializable
-data class DiamondPearl(
+internal data class DiamondPearl(
     @SerialName("back_default")
     val backDefault: String,
     @SerialName("back_female")
@@ -376,7 +376,7 @@ data class DiamondPearl(
 )
 
 @Serializable
-data class HeartgoldSoulsilver(
+internal data class HeartgoldSoulsilver(
     @SerialName("back_default")
     val backDefault: String,
     @SerialName("back_female")
@@ -396,7 +396,7 @@ data class HeartgoldSoulsilver(
 )
 
 @Serializable
-data class Platinum(
+internal data class Platinum(
     @SerialName("back_default")
     val backDefault: String,
     @SerialName("back_female")
@@ -416,13 +416,13 @@ data class Platinum(
 )
 
 @Serializable
-data class GenerationV(
+internal data class GenerationV(
     @SerialName("black-white")
     val blackWhite: BlackWhite,
 )
 
 @Serializable
-data class BlackWhite(
+internal data class BlackWhite(
     val animated: Animated,
     @SerialName("back_default")
     val backDefault: String,
@@ -443,7 +443,7 @@ data class BlackWhite(
 )
 
 @Serializable
-data class Animated(
+internal data class Animated(
     @SerialName("back_default")
     val backDefault: String,
     @SerialName("back_female")
@@ -463,7 +463,7 @@ data class Animated(
 )
 
 @Serializable
-data class GenerationVi(
+internal data class GenerationVi(
     @SerialName("omegaruby-alphasapphire")
     val omegarubyAlphasapphire: OmegarubyAlphasapphire,
     @SerialName("x-y")
@@ -471,7 +471,7 @@ data class GenerationVi(
 )
 
 @Serializable
-data class OmegarubyAlphasapphire(
+internal data class OmegarubyAlphasapphire(
     @SerialName("front_default")
     val frontDefault: String,
     @SerialName("front_female")
@@ -483,7 +483,7 @@ data class OmegarubyAlphasapphire(
 )
 
 @Serializable
-data class XY(
+internal data class XY(
     @SerialName("front_default")
     val frontDefault: String,
     @SerialName("front_female")
@@ -495,14 +495,14 @@ data class XY(
 )
 
 @Serializable
-data class GenerationVii(
+internal data class GenerationVii(
     val icons: Icons,
     @SerialName("ultra-sun-ultra-moon")
     val ultraSunUltraMoon: UltraSunUltraMoon,
 )
 
 @Serializable
-data class Icons(
+internal data class Icons(
     @SerialName("front_default")
     val frontDefault: String,
     @SerialName("front_female")
@@ -510,7 +510,7 @@ data class Icons(
 )
 
 @Serializable
-data class UltraSunUltraMoon(
+internal data class UltraSunUltraMoon(
     @SerialName("front_default")
     val frontDefault: String,
     @SerialName("front_female")
@@ -522,12 +522,12 @@ data class UltraSunUltraMoon(
 )
 
 @Serializable
-data class GenerationViii(
+internal data class GenerationViii(
     val icons: Icons2,
 )
 
 @Serializable
-data class Icons2(
+internal data class Icons2(
     @SerialName("front_default")
     val frontDefault: String,
     @SerialName("front_female")
@@ -535,13 +535,13 @@ data class Icons2(
 )
 
 @Serializable
-data class Cries(
+internal data class Cries(
     val latest: String,
     val legacy: String,
 )
 
 @Serializable
-data class Stat(
+internal data class Stat(
     @SerialName("base_stat")
     val baseStat: Long,
     val effort: Long,
@@ -549,43 +549,43 @@ data class Stat(
 )
 
 @Serializable
-data class Stat2(
+internal data class Stat2(
     val name: String,
     val url: String,
 )
 
 @Serializable
-data class Type(
+internal data class Type(
     val slot: Long,
     val type: Type2,
 )
 
 @Serializable
-data class Type2(
+internal data class Type2(
     val name: String,
     val url: String,
 )
 
 @Serializable
-data class PastType(
+internal data class PastType(
     val generation: Generation,
     val types: List<Type3>,
 )
 
 @Serializable
-data class Generation(
+internal data class Generation(
     val name: String,
     val url: String,
 )
 
 @Serializable
-data class Type3(
+internal data class Type3(
     val slot: Long,
     val type: Type4,
 )
 
 @Serializable
-data class Type4(
+internal data class Type4(
     val name: String,
     val url: String,
 )

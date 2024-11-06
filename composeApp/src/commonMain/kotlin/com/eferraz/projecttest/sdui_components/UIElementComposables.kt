@@ -1,7 +1,6 @@
 package com.eferraz.projecttest.sdui_components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.pager.HorizontalPager
@@ -14,13 +13,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.util.fastForEach
 import coil3.compose.AsyncImage
-import coil3.compose.LocalPlatformContext
-import coil3.compose.rememberAsyncImagePainter
-import coil3.request.ImageRequest
-import coil3.request.crossfade
 import com.eferraz.projecttest.sdui_mechanism.SDUIContainerScope
 import com.eferraz.projecttest.sdui_mechanism.UIElementComposable
-import org.jetbrains.compose.resources.painterResource
 
 internal class UIScaffoldComposable : UIElementComposable<UIScaffold>() {
 
@@ -141,11 +135,14 @@ internal class UIRowComposable : UIElementComposable<UIRow>() {
 
     @Composable
     override fun SDUIContainerScope.build(modifier: Modifier, component: UIRow) {
-        Row { component.pages.build() }
+        Row(verticalAlignment = component.verticalAlignment.alignment) {
+            component.content.build()
+        }
     }
 }
 
 internal class UIImageComposable : UIElementComposable<UIImage>() {
+
     @Composable
     override fun SDUIContainerScope.build(modifier: Modifier, component: UIImage) {
         AsyncImage(
