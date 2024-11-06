@@ -22,18 +22,18 @@ class SDUIContainerScope @OptIn(ExperimentalFoundationApi::class) private constr
 
 
     @Composable
-     inline fun <reified Element : UIElement> Element.build() {
+    inline fun <reified Element : UIElement> Element.build() {
         with(koinInject<UIElementComposable<Element>>(named(this.serial()))) {
             build(component = this@build)
         }
     }
 
     @Composable
-     inline fun <reified Element : UIElement> List<Element>.build() {
+    inline fun <reified Element : UIElement> List<Element>.build() {
         this.map { it.build() }
     }
 
-     inline fun <reified Action : UIAction> Action.build() {
+    inline fun <reified Action : UIAction> Action.build() {
         with(get<UIActionBehavior<Action>>(named(this@build.serial()))) {
             build(action = this@build)
         }

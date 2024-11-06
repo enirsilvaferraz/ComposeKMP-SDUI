@@ -31,17 +31,16 @@ internal inline fun <reified Action : UIAction> Module.registerComponent(
 
     val name = clazz.serializer().descriptor.serialName
     factory(named(name)) { composable } bind UIActionBehavior::class
-    factory(named(name)) { SDUIActionRegister(actual = clazz, serializer = clazz.serializer()) }
+    factory(named(name)) { SDUIElementRegister(actual = clazz, serializer = clazz.serializer()) }
 }
 
-internal data class SDUIElementRegister<T : UIElement>(val actual: KClass<T>, val serializer: KSerializer<T>)
-internal data class SDUIActionRegister<T : UIAction>(val actual: KClass<T>, val serializer: KSerializer<T>)
+internal data class SDUIElementRegister<T : UIThing>(val actual: KClass<T>, val serializer: KSerializer<T>)
 
 fun Scope.sduiPolymorphicComponents() = SerializersModule {
     getAll<SDUIElementRegister<UIElement>>().forEach {
         polymorphic(UIElement::class, it.actual, it.serializer)
     }
-    getAll<SDUIActionRegister<UIAction>>().forEach {
+    getAll<SDUIElementRegister<UIAction>>().forEach {
         polymorphic(UIAction::class, it.actual, it.serializer)
     }
 }
