@@ -14,7 +14,7 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.get
 import org.koin.core.qualifier.named
 
-internal class SDUIContainerScope @OptIn(ExperimentalFoundationApi::class) private constructor(
+class SDUIContainerScope @OptIn(ExperimentalFoundationApi::class) private constructor(
     val navController: NavHostController,
     val pagerState: MutableState<PagerState?>,
     val coroutineScope: CoroutineScope
@@ -22,18 +22,18 @@ internal class SDUIContainerScope @OptIn(ExperimentalFoundationApi::class) priva
 
 
     @Composable
-    internal inline fun <reified Element : UIElement> Element.build() {
+     inline fun <reified Element : UIElement> Element.build() {
         with(koinInject<UIElementComposable<Element>>(named(this.serial()))) {
             build(component = this@build)
         }
     }
 
     @Composable
-    internal inline fun <reified Element : UIElement> List<Element>.build() {
+     inline fun <reified Element : UIElement> List<Element>.build() {
         this.map { it.build() }
     }
 
-    internal inline fun <reified Action : UIAction> Action.build() {
+     inline fun <reified Action : UIAction> Action.build() {
         with(get<UIActionBehavior<Action>>(named(this@build.serial()))) {
             build(action = this@build)
         }

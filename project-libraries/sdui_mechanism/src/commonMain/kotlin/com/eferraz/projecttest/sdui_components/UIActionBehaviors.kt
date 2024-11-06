@@ -6,11 +6,11 @@ import com.eferraz.projecttest.sdui_mechanism.UIActionBehavior
 import kotlinx.coroutines.launch
 
 
-internal class UINavigationBehavior : UIActionBehavior<UINavigation>() {
-    override fun SDUIContainerScope.build(action: UINavigation) {
-        navController.navigate(action.destination)
-    }
-}
+//internal class UINavigationBehavior : UIActionBehavior<UINavigation>() {
+//    override fun SDUIContainerScope.build(action: UINavigation) {
+//        navController.navigate(action.destination)
+//    }
+//}
 
 internal class UIChangePageBehavior : UIActionBehavior<UIChangePage>() {
 

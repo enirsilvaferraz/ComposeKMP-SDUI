@@ -37,7 +37,7 @@ internal inline fun <reified Action : UIAction> Module.registerComponent(
 internal data class SDUIElementRegister<T : UIElement>(val actual: KClass<T>, val serializer: KSerializer<T>)
 internal data class SDUIActionRegister<T : UIAction>(val actual: KClass<T>, val serializer: KSerializer<T>)
 
-internal fun Scope.sduiPolymorphicComponents() = SerializersModule {
+fun Scope.sduiPolymorphicComponents() = SerializersModule {
     getAll<SDUIElementRegister<UIElement>>().forEach {
         polymorphic(UIElement::class, it.actual, it.serializer)
     }

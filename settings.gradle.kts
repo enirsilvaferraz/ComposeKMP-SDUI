@@ -28,4 +28,5 @@ dependencyResolutionManagement {
     }
 }
 
+include(":project-libraries:sdui_mechanism")
 include(":composeApp")

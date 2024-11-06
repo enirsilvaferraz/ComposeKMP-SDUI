@@ -15,6 +15,6 @@ val componentModule = module {
     registerComponent(UIRow::class, UIRowComposable())
     registerComponent(UIImage::class, UIImageComposable())
 
-    registerComponent(UINavigation::class, UINavigationBehavior())
+//    registerComponent(UINavigation::class, UINavigationBehavior())
     registerComponent(UIChangePage::class, UIChangePageBehavior())
 }
