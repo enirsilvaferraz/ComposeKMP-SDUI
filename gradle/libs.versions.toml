@@ -1,15 +1,20 @@
 [versions]
 
-agp = "8.2.2"
 android-compileSdk = "35"
 android-minSdk = "24"
 android-targetSdk = "35"
-androidx-activityCompose = "1.9.3"
-androidx-core-ktx = "1.13.1"
-androidx-lifecycle = "2.8.0"
-androidx-navigation = "2.7.0-alpha07"
+
+agp = "8.5.0"
 compose-plugin = "1.6.11"
 kotlin = "2.0.21"
+
+ksp = "2.0.21-1.0.25"
+
+androidx-activityCompose = "1.9.3"
+androidx-core-ktx = "1.15.0"
+androidx-lifecycle = "2.8.0"
+androidx-navigation = "2.7.0-alpha07"
+
 coroutines = "1.9.0"
 ktor = "3.0.0"
 logging_version = "1.5.0"
@@ -17,7 +22,6 @@ koin-bom = "4.0.0-RC1" # 4.0.0 nao esta funcionando corretamente
 statelyCommon = "2.1.0"
 kotlinx-serialization = "1.7.3"
 coil3 = "3.0.0-rc02"
-ksp = "2.0.21-1.0.25"
 sqlite = "2.5.0-SNAPSHOT"
 androidx-room = "2.7.0-alpha11"
 
