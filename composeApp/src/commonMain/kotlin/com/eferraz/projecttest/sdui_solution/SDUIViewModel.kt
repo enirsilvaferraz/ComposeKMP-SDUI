@@ -2,7 +2,7 @@ package com.eferraz.projecttest.sdui_solution
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.eferraz.projecttest.sdui_mechanism.UIElement
+import com.eferraz.projecttest.sdui_mechanism.models.UIComponent
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -24,6 +24,6 @@ internal class SDUIViewModel(
     sealed class ScreenState {
 
         data object Loading : ScreenState()
-        class Success(val screen: UIElement) : ScreenState()
+        class Success(val screen: UIComponent) : ScreenState()
     }
 }

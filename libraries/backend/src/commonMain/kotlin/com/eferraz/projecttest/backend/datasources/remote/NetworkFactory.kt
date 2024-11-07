@@ -1,4 +1,4 @@
-package com.eferraz.projecttest.backend.datasources.remote.ktor
+package com.eferraz.projecttest.backend.datasources.remote
 
 import io.ktor.client.*
 import io.ktor.client.plugins.cache.*

@@ -2,7 +2,7 @@ package com.eferraz.projecttest.backend.di
 
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.eferraz.projecttest.backend.datasources.local.room.AppDatabase
+import com.eferraz.projecttest.backend.datasources.local.AppDatabase
 import kotlinx.cinterop.ExperimentalForeignApi
 import org.koin.core.module.Module
 import org.koin.dsl.module

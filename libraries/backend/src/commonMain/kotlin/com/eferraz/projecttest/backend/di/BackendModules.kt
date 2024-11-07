@@ -1,13 +1,17 @@
 package com.eferraz.projecttest.backend.di
 
-import com.eferraz.projecttest.backend.ApiOrchestror
+import com.eferraz.projecttest.backend.api.ApiOrchestrator
+import com.eferraz.projecttest.backend.api.ApiOrchestratorImpl
 import com.eferraz.projecttest.backend.api.HomeApi
 import com.eferraz.projecttest.backend.api.HomeApiImpl
-import com.eferraz.projecttest.backend.datasources.local.PokemonDataSourceDao
-import com.eferraz.projecttest.backend.datasources.local.room.AppDatabase
-import com.eferraz.projecttest.backend.datasources.local.room.RoomDatabaseFactory
+import com.eferraz.projecttest.backend.datasources.ReadableDataSource
+import com.eferraz.projecttest.backend.datasources.WritableDataSource
+import com.eferraz.projecttest.backend.datasources.local.PokemonDao
+import com.eferraz.projecttest.backend.datasources.local.AppDatabase
+import com.eferraz.projecttest.backend.datasources.local.PokemonDataSourceLocal
+import com.eferraz.projecttest.backend.datasources.local.RoomDatabaseFactory
 import com.eferraz.projecttest.backend.datasources.remote.PokemonDataSourceRemote
-import com.eferraz.projecttest.backend.datasources.remote.ktor.NetworkFactory
+import com.eferraz.projecttest.backend.datasources.remote.NetworkFactory
 import com.eferraz.projecttest.backend.repository.PokemonRepository
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
@@ -21,15 +25,19 @@ val backendModule = module {
      * Internal Configurations
      */
     includes(platformBackendModule)
+
     single { NetworkFactory().build() }
+
     single { RoomDatabaseFactory(get()).build() }
+    single { get<AppDatabase>().getDao() } bind PokemonDao::class
+
 
     /*
      * Internal Data Sources
      */
 
-    single { get<AppDatabase>().getDao() } bind PokemonDataSourceDao::class
-    singleOf(::PokemonDataSourceRemote) bind PokemonDataSourceRemote::class
+    singleOf(::PokemonDataSourceRemote) bind ReadableDataSource::class
+    singleOf(::PokemonDataSourceLocal) bind WritableDataSource::class
 
     /*
      * Internal Repositories
@@ -47,7 +55,7 @@ val backendModule = module {
      * Public APIs
      */
 
-    singleOf(::ApiOrchestror)
+    singleOf(::ApiOrchestratorImpl) bind ApiOrchestrator::class
 }
 
 expect val platformBackendModule: Module

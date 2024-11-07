@@ -5,7 +5,12 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material.*
+import androidx.compose.material.BottomAppBar
+import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Icon
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Settings
@@ -13,13 +18,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.util.fastForEach
 import coil3.compose.AsyncImage
-import com.eferraz.projecttest.sdui_mechanism.SDUIContainerScope
-import com.eferraz.projecttest.sdui_mechanism.UIElementComposable
+import com.eferraz.projecttest.sdui_mechanism.SDUIScreenScope
+import com.eferraz.projecttest.sdui_mechanism.models.UIElementComposable
 
 internal class UIScaffoldComposable : UIElementComposable<UIScaffold>() {
 
     @Composable
-    override fun SDUIContainerScope.build(modifier: Modifier, component: UIScaffold) {
+    override fun SDUIScreenScope.build(modifier: Modifier, component: UIScaffold) {
 
         Scaffold(
             modifier = modifier,
@@ -33,7 +38,7 @@ internal class UIScaffoldComposable : UIElementComposable<UIScaffold>() {
 internal class UILazyColumnComposable : UIElementComposable<UILazyColumn>() {
 
     @Composable
-    override fun SDUIContainerScope.build(modifier: Modifier, component: UILazyColumn) {
+    override fun SDUIScreenScope.build(modifier: Modifier, component: UILazyColumn) {
 
         LazyColumn(
             modifier = modifier,
@@ -51,7 +56,7 @@ internal class UILazyColumnComposable : UIElementComposable<UILazyColumn>() {
 internal class UITopBarComposable : UIElementComposable<UITopBar>() {
 
     @Composable
-    override fun SDUIContainerScope.build(modifier: Modifier, component: UITopBar) {
+    override fun SDUIScreenScope.build(modifier: Modifier, component: UITopBar) {
 
         TopAppBar(
             modifier = modifier,
@@ -63,7 +68,7 @@ internal class UITopBarComposable : UIElementComposable<UITopBar>() {
 internal class UITextComposable : UIElementComposable<UIText>() {
 
     @Composable
-    override fun SDUIContainerScope.build(modifier: Modifier, component: UIText) {
+    override fun SDUIScreenScope.build(modifier: Modifier, component: UIText) {
 
         Text(
             modifier = modifier,
@@ -75,7 +80,7 @@ internal class UITextComposable : UIElementComposable<UIText>() {
 internal class UIIconComposable : UIElementComposable<UIIcon>() {
 
     @Composable
-    override fun SDUIContainerScope.build(modifier: Modifier, component: UIIcon) {
+    override fun SDUIScreenScope.build(modifier: Modifier, component: UIIcon) {
 
         when (component.icon) {
             Icons.Default.Home.name -> Icons.Default.Home
@@ -96,7 +101,7 @@ internal class UIBottomBarComposable : UIElementComposable<UIBottomBar>() {
 
     @OptIn(ExperimentalFoundationApi::class)
     @Composable
-    override fun SDUIContainerScope.build(modifier: Modifier, component: UIBottomBar) {
+    override fun SDUIScreenScope.build(modifier: Modifier, component: UIBottomBar) {
 
         BottomAppBar(modifier = modifier) {
             component.content.forEachIndexed { index, item ->
@@ -115,7 +120,7 @@ internal class UIHorizontalPagerComposable : UIElementComposable<UIHorizontalPag
 
     @OptIn(ExperimentalFoundationApi::class)
     @Composable
-    override fun SDUIContainerScope.build(modifier: Modifier, component: UIHorizontalPager) {
+    override fun SDUIScreenScope.build(modifier: Modifier, component: UIHorizontalPager) {
 
         val state = rememberPagerState(initialPage = 0, pageCount = { component.pages.size }).also {
             pagerState.value = it
@@ -134,7 +139,7 @@ internal class UIHorizontalPagerComposable : UIElementComposable<UIHorizontalPag
 internal class UIRowComposable : UIElementComposable<UIRow>() {
 
     @Composable
-    override fun SDUIContainerScope.build(modifier: Modifier, component: UIRow) {
+    override fun SDUIScreenScope.build(modifier: Modifier, component: UIRow) {
         Row(verticalAlignment = component.verticalAlignment.alignment) {
             component.content.build()
         }
@@ -144,7 +149,7 @@ internal class UIRowComposable : UIElementComposable<UIRow>() {
 internal class UIImageComposable : UIElementComposable<UIImage>() {
 
     @Composable
-    override fun SDUIContainerScope.build(modifier: Modifier, component: UIImage) {
+    override fun SDUIScreenScope.build(modifier: Modifier, component: UIImage) {
         AsyncImage(
             modifier = modifier,
             model = component.url,

@@ -9,7 +9,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.eferraz.projecttest.sdui_mechanism.SDUIContainerScope
+import com.eferraz.projecttest.sdui_mechanism.SDUIScreenScope
 import com.eferraz.projecttest.sdui_solution.SDUIViewModel.ScreenState
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -21,7 +21,7 @@ internal fun DefaultScreen(
 
     val state by vm.state.collectAsState()
 
-    with(SDUIContainerScope.build()) {
+    with(SDUIScreenScope.build()) {
         when (state) {
             ScreenState.Loading -> LoadingScreen()
             is ScreenState.Success -> SuccessScreen(state as ScreenState.Success)
@@ -30,7 +30,7 @@ internal fun DefaultScreen(
 }
 
 @Composable
-private fun SDUIContainerScope.LoadingScreen() {
+private fun SDUIScreenScope.LoadingScreen() {
 
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -41,7 +41,7 @@ private fun SDUIContainerScope.LoadingScreen() {
 }
 
 @Composable
-private fun SDUIContainerScope.SuccessScreen(
+private fun SDUIScreenScope.SuccessScreen(
     state: ScreenState.Success
 ) {
     state.screen.build()

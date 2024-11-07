@@ -1,5 +1,6 @@
 package com.eferraz.projecttest.sdui_components
 
+import com.eferraz.projecttest.sdui_mechanism.registerAction
 import com.eferraz.projecttest.sdui_mechanism.registerComponent
 import org.koin.dsl.module
 
@@ -16,5 +17,5 @@ val componentModule = module {
     registerComponent(UIImage::class, UIImageComposable())
 
 //    registerComponent(UINavigation::class, UINavigationBehavior())
-    registerComponent(UIChangePage::class, UIChangePageBehavior())
+    registerAction(UIChangePage::class, UIChangePageBehavior())
 }

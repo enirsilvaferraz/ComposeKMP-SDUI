@@ -1,4 +1,4 @@
-package com.eferraz.projecttest.backend
+package com.eferraz.projecttest.backend.models
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

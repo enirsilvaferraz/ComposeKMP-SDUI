@@ -1,19 +1,17 @@
-package com.eferraz.projecttest.backend.datasources.local.room
+package com.eferraz.projecttest.backend.datasources.local
 
 import androidx.room.ConstructedBy
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.RoomDatabaseConstructor
 import androidx.sqlite.driver.bundled.BundledSQLiteDriver
-import com.eferraz.projecttest.backend.datasources.local.PokemonDataSourceDao
-import com.eferraz.projecttest.backend.datasources.local.PokemonEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
 
 @Database(entities = [PokemonEntity::class], version = 1)
 @ConstructedBy(AppDatabaseConstructor::class)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun getDao(): PokemonDataSourceDao
+    abstract fun getDao(): PokemonDao
 }
 
 // The Room compiler generates the `actual` implementations.
