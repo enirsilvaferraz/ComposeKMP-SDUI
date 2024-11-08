@@ -3,52 +3,79 @@ package com.eferraz.projecttest.sdui_components
 import androidx.compose.ui.Alignment
 import com.eferraz.projecttest.sdui_mechanism.models.UIAction
 import com.eferraz.projecttest.sdui_mechanism.models.UIComponent
+import com.eferraz.projecttest.sdui_mechanism.models.UIModifier
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-@SerialName("ui-scafold")
-data class UIScaffold(val topBar: UIComponent? = null, val content: UIComponent, val bottonBar: UIComponent? = null) :
-    UIComponent()
+@SerialName("ui-component-scafold")
+data class UIScaffold(
+    override val modifier: List<UIModifier> = listOf(),
+    val topBar: UIComponent? = null,
+    val content: UIComponent,
+    val bottonBar: UIComponent? = null,
+) : UIComponent()
 
 @Serializable
-@SerialName("ui-top-bar")
-data class UITopBar(val title: UIComponent) : UIComponent()
+@SerialName("ui-component-top-bar")
+data class UITopBar(
+    override val modifier: List<UIModifier> = listOf(),
+    val title: UIComponent,
+) : UIComponent()
 
 @Serializable
-@SerialName("ui-lazy-column")
-data class UILazyColumn(val body: List<UIComponent>) : UIComponent()
+@SerialName("ui-component-lazy-column")
+data class UILazyColumn(
+    override val modifier: List<UIModifier> = listOf(),
+    val body: List<UIComponent>,
+) : UIComponent()
 
 @Serializable
-@SerialName("ui-lazy-column-item")
-data class UILazyColumnItem(val item: UIComponent) : UIComponent()
+@SerialName("ui-component-lazy-column-item")
+data class UILazyColumnItem(
+    override val modifier: List<UIModifier> = listOf(),
+    val item: UIComponent,
+) : UIComponent()
 
 @Serializable
-@SerialName("ui-text")
-data class UIText(val text: String) : UIComponent()
+@SerialName("ui-component-text")
+data class UIText(
+    override val modifier: List<UIModifier> = listOf(),
+    val text: String,
+) : UIComponent()
 
 @Serializable
-@SerialName("ui-icon")
-data class UIIcon(val icon: String, val contentDescription: String = "") : UIComponent()
+@SerialName("ui-component-icon")
+data class UIIcon(
+    override val modifier: List<UIModifier> = listOf(),
+    val icon: String, val contentDescription: String = "",
+) : UIComponent()
 
 @Serializable
-@SerialName("ui-botton-bar")
-data class UIBottomBar(val content: List<Item>) : UIComponent() {
+@SerialName("ui-component-botton-bar")
+data class UIBottomBar(
+    override val modifier: List<UIModifier> = listOf(),
+    val content: List<Item>,
+) : UIComponent() {
 
     @Serializable
     data class Item(val icon: UIIcon, val label: UIComponent, val onClick: UIAction)
 }
 
 @Serializable
-@SerialName("ui-horizontal-pager")
-data class UIHorizontalPager(val pages: List<UIComponent>) : UIComponent()
+@SerialName("ui-component-horizontal-pager")
+data class UIHorizontalPager(
+    override val modifier: List<UIModifier> = listOf(),
+    val pages: List<UIComponent>,
+) : UIComponent()
 
 
 @Serializable
-@SerialName("ui-row")
+@SerialName("ui-component-row")
 data class UIRow(
+    override val modifier: List<UIModifier> = listOf(),
     val verticalAlignment: VerticalAlignment,
-    val content: List<UIComponent>
+    val content: List<UIComponent>,
 ) : UIComponent() {
 
     enum class VerticalAlignment(val alignment: Alignment.Vertical) {
@@ -59,8 +86,12 @@ data class UIRow(
 }
 
 @Serializable
-@SerialName("ui-image")
-data class UIImage(val url: String, val contentDescription: String) : UIComponent()
+@SerialName("ui-component-image")
+data class UIImage(
+    override val modifier: List<UIModifier> = listOf(),
+    val url: String?,
+    val contentDescription: String,
+) : UIComponent()
 
 
 

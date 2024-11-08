@@ -10,5 +10,5 @@ import kotlinx.serialization.Serializable
 //internal class UINavigation(val destination: NavRoot) : UIAction()
 
 @Serializable
-@SerialName("ui-change-page")
+@SerialName("ui-action-change-page")
 internal class UIChangePage(val nextPage: Int) : UIAction()

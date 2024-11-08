@@ -8,5 +8,5 @@ internal class ScreenRepository(
     private val api: ApiOrchestrator,
     private val json: Json
 ) {
-    suspend fun get(): UIComponent = json.decodeFromString(api.get())
+    suspend fun get(): UIComponent = json.decodeFromString(api.get().also { println(it) })
 }

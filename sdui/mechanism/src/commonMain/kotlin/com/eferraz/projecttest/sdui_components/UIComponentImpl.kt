@@ -140,7 +140,10 @@ internal class UIRowComponentImpl : UIComponentImpl<UIRow>() {
 
     @Composable
     override fun SDUIScreenScope.build(modifier: Modifier, component: UIRow) {
-        Row(verticalAlignment = component.verticalAlignment.alignment) {
+        Row(
+            modifier = modifier,
+            verticalAlignment = component.verticalAlignment.alignment
+        ) {
             component.content.map { it.build() }
         }
     }

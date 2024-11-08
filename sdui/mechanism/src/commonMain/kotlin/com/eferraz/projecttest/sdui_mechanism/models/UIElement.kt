@@ -13,7 +13,9 @@ abstract class UIElement
  * Ex.: Buttons, Text, Images, etc.
  */
 @Serializable
-abstract class UIComponent : UIElement()
+abstract class UIComponent : UIElement() {
+    abstract val modifier: List<UIModifier>
+}
 
 /**
  * Classe base para todos os elementos do SDUI que podem ser interativos.

@@ -10,6 +10,7 @@ import org.koin.dsl.module
 val mechanismModule = module {
     factory {
         Json {
+            prettyPrint = true
             serializersModule = SerializersModule {
                 configurePolymorphism<UIComponent>(this)
                 configurePolymorphism<UIAction>(this)

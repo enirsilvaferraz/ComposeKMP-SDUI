@@ -11,6 +11,9 @@ import com.eferraz.projecttest.sdui_components.UIScaffold
 import com.eferraz.projecttest.sdui_components.UIText
 import com.eferraz.projecttest.sdui_components.UITopBar
 import com.eferraz.projecttest.sdui_mechanism.models.UIComponent
+import com.eferraz.projecttest.sdui_mechanism.models.UIFillMaxWidth
+import com.eferraz.projecttest.sdui_mechanism.models.UIPadding
+import com.eferraz.projecttest.sdui_mechanism.models.UISize
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
@@ -37,10 +40,19 @@ private fun List<Pokemon>.toSDUI(): UIComponent = UIScaffold(
 )
 
 private fun Pokemon.itemList() = UIRow(
+    modifier = listOf(UIFillMaxWidth),
     verticalAlignment = UIRow.VerticalAlignment.CENTER_VERTICALLY,
-    content = arrayListOf<UIComponent>().apply {
-        if (sprites.frontDefault != null)
-            add(UIImage(url = sprites.frontDefault, contentDescription = name))
-        add(UIText(text = name.capitalize(Locale.current)))
-    }
+    content = listOf(
+        UIImage(
+            url = sprites.frontDefault,
+            contentDescription = name,
+            modifier = listOf(
+                UIPadding(horizontal = 24),
+                UISize(60)
+            )
+        ),
+        UIText(
+            text = name.capitalize(Locale.current)
+        )
+    )
 )
