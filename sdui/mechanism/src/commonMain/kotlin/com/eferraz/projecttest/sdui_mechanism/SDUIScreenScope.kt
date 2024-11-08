@@ -10,10 +10,10 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.eferraz.projecttest.sdui_mechanism.models.UIAction
-import com.eferraz.projecttest.sdui_mechanism.models.UIActionBehavior
+import com.eferraz.projecttest.sdui_mechanism.models.UIActionImpl
 import com.eferraz.projecttest.sdui_mechanism.models.UIComponent
 import com.eferraz.projecttest.sdui_mechanism.models.UIElement
-import com.eferraz.projecttest.sdui_mechanism.models.UIElementComposable
+import com.eferraz.projecttest.sdui_mechanism.models.UIComponentImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.InternalSerializationApi
@@ -24,8 +24,8 @@ import org.koin.core.component.get
 import org.koin.core.qualifier.named
 
 /**
- * Escopo de tela, usado para dar contexto a todos os elementos do SDUI.
- * Compartilha configurações da mesma forma que uma tela composable.
+ * Screen scope for SDUI.
+ * Shares the same configuration as a composable screen.
  */
 class SDUIScreenScope @OptIn(ExperimentalFoundationApi::class) private constructor(
     val navController: NavHostController,
@@ -35,17 +35,17 @@ class SDUIScreenScope @OptIn(ExperimentalFoundationApi::class) private construct
 
 
     /**
-     * Método para renderizar um elemento do tipo [UIComponent].
+     * Method to handle an [UIComponent] element.
      */
     @Composable
     inline fun <reified Element : UIComponent> Element.build() {
-        with(get<UIElementComposable<Element>>(named(this.serial()))) {
+        with(get<UIComponentImpl<Element>>(named(this.serial()))) {
             build(component = this@build, modifier = Modifier)
         }
     }
 
     /**
-     * Método para renderizar uma lista de elementos do tipo [UIComponent].
+     * Method to handle a list of [UIComponent] element.
      */
     @Composable
     inline fun <reified Element : UIComponent> List<Element>.build() {
@@ -53,16 +53,16 @@ class SDUIScreenScope @OptIn(ExperimentalFoundationApi::class) private construct
     }
 
     /**
-     * Método para executar um elemento do tipo [UIAction].
+     * Method to handle an [UIAction] element.
      */
     inline fun <reified Action : UIAction> Action.build() {
-        with(get<UIActionBehavior<Action>>(named(this@build.serial()))) {
+        with(get<UIActionImpl<Action>>(named(this@build.serial()))) {
             build(action = this@build)
         }
     }
 
     /**
-     * Retorna o nome de serialização do [UIElement] descriminado na anotação [SerialName].
+     * @return the serialization name of an [UIElement] described by [SerialName] annotation.
      */
     @OptIn(ExperimentalSerializationApi::class, InternalSerializationApi::class)
     inline fun <reified Element : UIElement> Element.serial(): String = this::class.serializer().descriptor.serialName
@@ -70,7 +70,7 @@ class SDUIScreenScope @OptIn(ExperimentalFoundationApi::class) private construct
     companion object {
 
         /**
-         * Método para criar um [SDUIScreenScope].
+         * Builder of [SDUIScreenScope].
          */
         @OptIn(ExperimentalFoundationApi::class)
         @Composable

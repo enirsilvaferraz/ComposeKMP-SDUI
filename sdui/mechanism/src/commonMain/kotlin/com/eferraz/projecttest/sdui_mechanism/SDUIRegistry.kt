@@ -2,10 +2,10 @@ package com.eferraz.projecttest.sdui_mechanism
 
 
 import com.eferraz.projecttest.sdui_mechanism.models.UIAction
-import com.eferraz.projecttest.sdui_mechanism.models.UIActionBehavior
+import com.eferraz.projecttest.sdui_mechanism.models.UIActionImpl
 import com.eferraz.projecttest.sdui_mechanism.models.UIComponent
 import com.eferraz.projecttest.sdui_mechanism.models.UIElement
-import com.eferraz.projecttest.sdui_mechanism.models.UIElementComposable
+import com.eferraz.projecttest.sdui_mechanism.models.UIComponentImpl
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.KSerializer
@@ -24,10 +24,10 @@ import kotlin.reflect.KClass
  * @param composable A implementação do elemento a ser registrada.
  */
 @OptIn(InternalSerializationApi::class, ExperimentalSerializationApi::class)
-internal inline fun <reified Element : UIComponent> Module.registerComponent(clazz: KClass<Element>, composable: UIElementComposable<Element>) {
+internal inline fun <reified Element : UIComponent> Module.registerComponent(clazz: KClass<Element>, composable: UIComponentImpl<Element>) {
 
     val name = clazz.serializer().descriptor.serialName
-    factory(named(name)) { composable } bind UIElementComposable::class
+    factory(named(name)) { composable } bind UIComponentImpl::class
     factory(named(name)) { SDUIPolymorphicRegister(actual = clazz, serializer = clazz.serializer()) }
 }
 
@@ -38,10 +38,10 @@ internal inline fun <reified Element : UIComponent> Module.registerComponent(cla
  * @param composable A implementação do elemento a ser registrada.
  */
 @OptIn(InternalSerializationApi::class, ExperimentalSerializationApi::class)
-internal inline fun <reified Action : UIAction> Module.registerAction(clazz: KClass<Action>, composable: UIActionBehavior<Action>) {
+internal inline fun <reified Action : UIAction> Module.registerAction(clazz: KClass<Action>, composable: UIActionImpl<Action>) {
 
     val name = clazz.serializer().descriptor.serialName
-    factory(named(name)) { composable } bind UIActionBehavior::class
+    factory(named(name)) { composable } bind UIActionImpl::class
     factory(named(name)) { SDUIPolymorphicRegister(actual = clazz, serializer = clazz.serializer()) }
 }
 

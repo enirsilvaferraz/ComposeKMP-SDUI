@@ -6,16 +6,16 @@ import org.koin.dsl.module
 
 val componentModule = module {
 
-    registerComponent(UIScaffold::class, UIScaffoldComposable())
-    registerComponent(UIText::class, UITextComposable())
-    registerComponent(UITopBar::class, UITopBarComposable())
-    registerComponent(UILazyColumn::class, UILazyColumnComposable())
-    registerComponent(UIIcon::class, UIIconComposable())
-    registerComponent(UIBottomBar::class, UIBottomBarComposable())
-    registerComponent(UIHorizontalPager::class, UIHorizontalPagerComposable())
-    registerComponent(UIRow::class, UIRowComposable())
-    registerComponent(UIImage::class, UIImageComposable())
+    registerComponent(UIScaffold::class, UIScaffoldComponentImpl())
+    registerComponent(UIText::class, UITextComponentImpl())
+    registerComponent(UITopBar::class, UITopBarComponentImpl())
+    registerComponent(UILazyColumn::class, UILazyColumnComponentImpl())
+    registerComponent(UIIcon::class, UIIconComponentImpl())
+    registerComponent(UIBottomBar::class, UIBottomBarComponentImpl())
+    registerComponent(UIHorizontalPager::class, UIHorizontalPagerComponentImpl())
+    registerComponent(UIRow::class, UIRowComponentImpl())
+    registerComponent(UIImage::class, UIImageComponentImpl())
 
 //    registerComponent(UINavigation::class, UINavigationBehavior())
-    registerAction(UIChangePage::class, UIChangePageBehavior())
+    registerAction(UIChangePage::class, UIChangePageImpl())
 }

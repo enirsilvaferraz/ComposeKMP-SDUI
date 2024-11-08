@@ -2,7 +2,7 @@ package com.eferraz.projecttest.sdui_components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import com.eferraz.projecttest.sdui_mechanism.SDUIScreenScope
-import com.eferraz.projecttest.sdui_mechanism.models.UIActionBehavior
+import com.eferraz.projecttest.sdui_mechanism.models.UIActionImpl
 import kotlinx.coroutines.launch
 
 
@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 //    }
 //}
 
-internal class UIChangePageBehavior : UIActionBehavior<UIChangePage>() {
+internal class UIChangePageImpl : UIActionImpl<UIChangePage>() {
 
     @OptIn(ExperimentalFoundationApi::class)
     override fun SDUIScreenScope.build(action: UIChangePage) {

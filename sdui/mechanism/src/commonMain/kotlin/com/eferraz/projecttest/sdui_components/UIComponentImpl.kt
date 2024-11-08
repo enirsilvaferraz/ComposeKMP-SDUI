@@ -19,9 +19,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.util.fastForEach
 import coil3.compose.AsyncImage
 import com.eferraz.projecttest.sdui_mechanism.SDUIScreenScope
-import com.eferraz.projecttest.sdui_mechanism.models.UIElementComposable
+import com.eferraz.projecttest.sdui_mechanism.models.UIComponentImpl
 
-internal class UIScaffoldComposable : UIElementComposable<UIScaffold>() {
+internal class UIScaffoldComponentImpl : UIComponentImpl<UIScaffold>() {
 
     @Composable
     override fun SDUIScreenScope.build(modifier: Modifier, component: UIScaffold) {
@@ -35,7 +35,7 @@ internal class UIScaffoldComposable : UIElementComposable<UIScaffold>() {
     }
 }
 
-internal class UILazyColumnComposable : UIElementComposable<UILazyColumn>() {
+internal class UILazyColumnComponentImpl : UIComponentImpl<UILazyColumn>() {
 
     @Composable
     override fun SDUIScreenScope.build(modifier: Modifier, component: UILazyColumn) {
@@ -53,7 +53,7 @@ internal class UILazyColumnComposable : UIElementComposable<UILazyColumn>() {
     }
 }
 
-internal class UITopBarComposable : UIElementComposable<UITopBar>() {
+internal class UITopBarComponentImpl : UIComponentImpl<UITopBar>() {
 
     @Composable
     override fun SDUIScreenScope.build(modifier: Modifier, component: UITopBar) {
@@ -65,7 +65,7 @@ internal class UITopBarComposable : UIElementComposable<UITopBar>() {
     }
 }
 
-internal class UITextComposable : UIElementComposable<UIText>() {
+internal class UITextComponentImpl : UIComponentImpl<UIText>() {
 
     @Composable
     override fun SDUIScreenScope.build(modifier: Modifier, component: UIText) {
@@ -77,7 +77,7 @@ internal class UITextComposable : UIElementComposable<UIText>() {
     }
 }
 
-internal class UIIconComposable : UIElementComposable<UIIcon>() {
+internal class UIIconComponentImpl : UIComponentImpl<UIIcon>() {
 
     @Composable
     override fun SDUIScreenScope.build(modifier: Modifier, component: UIIcon) {
@@ -97,7 +97,7 @@ internal class UIIconComposable : UIElementComposable<UIIcon>() {
     }
 }
 
-internal class UIBottomBarComposable : UIElementComposable<UIBottomBar>() {
+internal class UIBottomBarComponentImpl : UIComponentImpl<UIBottomBar>() {
 
     @OptIn(ExperimentalFoundationApi::class)
     @Composable
@@ -116,7 +116,7 @@ internal class UIBottomBarComposable : UIElementComposable<UIBottomBar>() {
     }
 }
 
-internal class UIHorizontalPagerComposable : UIElementComposable<UIHorizontalPager>() {
+internal class UIHorizontalPagerComponentImpl : UIComponentImpl<UIHorizontalPager>() {
 
     @OptIn(ExperimentalFoundationApi::class)
     @Composable
@@ -136,7 +136,7 @@ internal class UIHorizontalPagerComposable : UIElementComposable<UIHorizontalPag
     }
 }
 
-internal class UIRowComposable : UIElementComposable<UIRow>() {
+internal class UIRowComponentImpl : UIComponentImpl<UIRow>() {
 
     @Composable
     override fun SDUIScreenScope.build(modifier: Modifier, component: UIRow) {
@@ -146,7 +146,7 @@ internal class UIRowComposable : UIElementComposable<UIRow>() {
     }
 }
 
-internal class UIImageComposable : UIElementComposable<UIImage>() {
+internal class UIImageComponentImpl : UIComponentImpl<UIImage>() {
 
     @Composable
     override fun SDUIScreenScope.build(modifier: Modifier, component: UIImage) {
