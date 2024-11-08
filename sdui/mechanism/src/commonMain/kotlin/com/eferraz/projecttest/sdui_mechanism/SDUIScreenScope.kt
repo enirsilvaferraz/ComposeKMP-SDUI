@@ -12,8 +12,9 @@ import androidx.navigation.compose.rememberNavController
 import com.eferraz.projecttest.sdui_mechanism.models.UIAction
 import com.eferraz.projecttest.sdui_mechanism.models.UIActionImpl
 import com.eferraz.projecttest.sdui_mechanism.models.UIComponent
-import com.eferraz.projecttest.sdui_mechanism.models.UIElement
 import com.eferraz.projecttest.sdui_mechanism.models.UIComponentImpl
+import com.eferraz.projecttest.sdui_mechanism.models.UIElement
+import com.eferraz.projecttest.sdui_mechanism.models.UIElementImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.InternalSerializationApi
@@ -30,36 +31,29 @@ import org.koin.core.qualifier.named
 class SDUIScreenScope @OptIn(ExperimentalFoundationApi::class) private constructor(
     val navController: NavHostController,
     val pagerState: MutableState<PagerState?>,
-    val coroutineScope: CoroutineScope
+    val coroutineScope: CoroutineScope,
 ) : KoinComponent {
 
-
     /**
-     * Method to handle an [UIComponent] element.
+     * Method to handle an [UIComponent] element implementation.
      */
     @Composable
-    inline fun <reified Element : UIComponent> Element.build() {
-        with(get<UIComponentImpl<Element>>(named(this.serial()))) {
-            build(component = this@build, modifier = Modifier)
+    inline fun <reified Component : UIComponent> Component.build() =
+        with(get<UIElementImpl<Component>>(named(this.serial()))) {
+            (this as? UIComponentImpl<Component>)?.let {
+                build(component = this@build, modifier = Modifier)
+            }
         }
-    }
 
     /**
-     * Method to handle a list of [UIComponent] element.
+     * Method to handle an [UIAction] element implementation.
      */
-    @Composable
-    inline fun <reified Element : UIComponent> List<Element>.build() {
-        this.map { it.build() }
-    }
-
-    /**
-     * Method to handle an [UIAction] element.
-     */
-    inline fun <reified Action : UIAction> Action.build() {
-        with(get<UIActionImpl<Action>>(named(this@build.serial()))) {
-            build(action = this@build)
+    inline fun <reified Action : UIAction> Action.build() =
+        with(get<UIElementImpl<Action>>(named(this.serial()))) {
+            (this as? UIActionImpl<Action>)?.let {
+                build(action = this@build)
+            }
         }
-    }
 
     /**
      * @return the serialization name of an [UIElement] described by [SerialName] annotation.

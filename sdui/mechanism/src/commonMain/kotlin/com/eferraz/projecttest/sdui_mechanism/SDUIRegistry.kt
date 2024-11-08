@@ -2,10 +2,9 @@ package com.eferraz.projecttest.sdui_mechanism
 
 
 import com.eferraz.projecttest.sdui_mechanism.models.UIAction
-import com.eferraz.projecttest.sdui_mechanism.models.UIActionImpl
 import com.eferraz.projecttest.sdui_mechanism.models.UIComponent
 import com.eferraz.projecttest.sdui_mechanism.models.UIElement
-import com.eferraz.projecttest.sdui_mechanism.models.UIComponentImpl
+import com.eferraz.projecttest.sdui_mechanism.models.UIElementImpl
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.KSerializer
@@ -18,31 +17,17 @@ import org.koin.dsl.bind
 import kotlin.reflect.KClass
 
 /**
- * Usado para registrar um elemento do tipo [UIComponent] e sua respectiva implementação na injeção de dependências.
+ * Usado para registrar um elemento do tipo [UIElement] e sua respectiva implementação na injeção de dependências.
  *
- * @param clazz A classe do elemento a ser registrado.
- * @param composable A implementação do elemento a ser registrada.
+ * @param elementKClass A classe do elemento a ser registrado.
+ * @param impl A implementação do elemento a ser registrada.
  */
 @OptIn(InternalSerializationApi::class, ExperimentalSerializationApi::class)
-internal inline fun <reified Element : UIComponent> Module.registerComponent(clazz: KClass<Element>, composable: UIComponentImpl<Element>) {
+internal inline fun <reified Element : UIElement> Module.registerElement(elementKClass: KClass<Element>, impl: UIElementImpl<Element>) {
 
-    val name = clazz.serializer().descriptor.serialName
-    factory(named(name)) { composable } bind UIComponentImpl::class
-    factory(named(name)) { SDUIPolymorphicRegister(actual = clazz, serializer = clazz.serializer()) }
-}
-
-/**
- * Usado para registrar um elemento do tipo [UIAction] e sua respectiva implementação na injeção de dependências.
- *
- * @param clazz A classe do elemento a ser registrado.
- * @param composable A implementação do elemento a ser registrada.
- */
-@OptIn(InternalSerializationApi::class, ExperimentalSerializationApi::class)
-internal inline fun <reified Action : UIAction> Module.registerAction(clazz: KClass<Action>, composable: UIActionImpl<Action>) {
-
-    val name = clazz.serializer().descriptor.serialName
-    factory(named(name)) { composable } bind UIActionImpl::class
-    factory(named(name)) { SDUIPolymorphicRegister(actual = clazz, serializer = clazz.serializer()) }
+    val name = elementKClass.serializer().descriptor.serialName
+    factory(named(name)) { impl } bind UIElementImpl::class
+    factory(named(name)) { SDUIPolymorphicRegister(actual = elementKClass, serializer = elementKClass.serializer()) }
 }
 
 /**
