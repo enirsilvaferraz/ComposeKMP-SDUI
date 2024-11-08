@@ -1,4 +1,4 @@
-package com.eferraz.projecttest.sdui_components
+package com.eferraz.projecttest.sdui_domain
 
 //import com.eferraz.projecttest.frontend.NavRoot
 import com.eferraz.projecttest.sdui_mechanism.models.UIAction

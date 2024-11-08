@@ -14,7 +14,7 @@ abstract class UIElement
  */
 @Serializable
 abstract class UIComponent : UIElement() {
-    abstract val modifier: List<UIModifier>
+    abstract val modifier: List<UIModifierAbs>
 }
 
 /**

@@ -1,11 +1,18 @@
-package com.eferraz.projecttest.sdui_mechanism.models
+package com.eferraz.projecttest.sdui_domain
 
+import com.eferraz.projecttest.sdui_mechanism.models.UIModifierAbs
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * Represents the base configuration of [androidx.compose.ui.Modifier].
+ */
 @Serializable
-sealed class UIModifier
+sealed class UIModifier : UIModifierAbs
 
+/**
+ * Represents the configuration [androidx.compose.foundation.layout.padding] of [androidx.compose.ui.Modifier].
+ */
 @Serializable
 @SerialName("ui-modifier-padding")
 data class UIPadding(
@@ -18,6 +25,9 @@ data class UIPadding(
     constructor(horizontal: Int = 0, vertical: Int = 0) : this(top = vertical, bottom = vertical, start = horizontal, end = horizontal)
 }
 
+/**
+ * Represents the configuration [androidx.compose.foundation.layout.size] of [androidx.compose.ui.Modifier].
+ */
 @Serializable
 @SerialName("ui-modifier-size")
 data class UISize(
@@ -27,12 +37,18 @@ data class UISize(
     constructor(size: Int) : this(width = size, height = size)
 }
 
+/**
+ * Represents the configuration [androidx.compose.foundation.layout.fillMaxWidth] of [androidx.compose.ui.Modifier].
+ */
+@Serializable
+@SerialName("ui-modifier-fill-max-width")
+data object UIFillMaxWidth : UIModifier()
+
+/**
+ * Represents the configuration [androidx.compose.foundation.background] of [androidx.compose.ui.Modifier].
+ */
 @Serializable
 @SerialName("ui-modifier-background")
 data class UIBackground(
     val color: Long,
 ) : UIModifier()
-
-@Serializable
-@SerialName("ui-modifier-fill-max-width")
-data object UIFillMaxWidth : UIModifier()

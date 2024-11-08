@@ -17,15 +17,15 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.eferraz.projecttest.sdui_mechanism.models.UIAction
 import com.eferraz.projecttest.sdui_mechanism.models.UIActionImpl
-import com.eferraz.projecttest.sdui_mechanism.models.UIBackground
+import com.eferraz.projecttest.sdui_domain.UIBackground
 import com.eferraz.projecttest.sdui_mechanism.models.UIComponent
 import com.eferraz.projecttest.sdui_mechanism.models.UIComponentImpl
 import com.eferraz.projecttest.sdui_mechanism.models.UIElement
 import com.eferraz.projecttest.sdui_mechanism.models.UIElementImpl
-import com.eferraz.projecttest.sdui_mechanism.models.UIFillMaxWidth
-import com.eferraz.projecttest.sdui_mechanism.models.UIModifier
-import com.eferraz.projecttest.sdui_mechanism.models.UIPadding
-import com.eferraz.projecttest.sdui_mechanism.models.UISize
+import com.eferraz.projecttest.sdui_domain.UIFillMaxWidth
+import com.eferraz.projecttest.sdui_mechanism.models.UIModifierAbs
+import com.eferraz.projecttest.sdui_domain.UIPadding
+import com.eferraz.projecttest.sdui_domain.UISize
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.InternalSerializationApi
@@ -85,7 +85,7 @@ class SDUIScreenScope @OptIn(ExperimentalFoundationApi::class) private construct
     }
 }
 
-fun List<UIModifier>.build(): Modifier {
+fun List<UIModifierAbs>.build(): Modifier {
 
     var modifier: Modifier = Modifier
 
@@ -95,6 +95,7 @@ fun List<UIModifier>.build(): Modifier {
             is UISize -> modifier.size(width = it.width.dp, height = it.height.dp)
             is UIBackground -> modifier.background(color = Color(it.color))
             is UIFillMaxWidth -> modifier.fillMaxWidth()
+            else -> throw IllegalArgumentException("Modifier not supported: $it")
         }
     }
 

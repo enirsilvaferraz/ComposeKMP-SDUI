@@ -18,6 +18,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.util.fastForEach
 import coil3.compose.AsyncImage
+import com.eferraz.projecttest.sdui_domain.UIBottomBar
+import com.eferraz.projecttest.sdui_domain.UIHorizontalPager
+import com.eferraz.projecttest.sdui_domain.UIIcon
+import com.eferraz.projecttest.sdui_domain.UIImage
+import com.eferraz.projecttest.sdui_domain.UILazyColumn
+import com.eferraz.projecttest.sdui_domain.UIRow
+import com.eferraz.projecttest.sdui_domain.UIScaffold
+import com.eferraz.projecttest.sdui_domain.UIText
+import com.eferraz.projecttest.sdui_domain.UITopBar
 import com.eferraz.projecttest.sdui_mechanism.SDUIScreenScope
 import com.eferraz.projecttest.sdui_mechanism.models.UIComponentImpl
 

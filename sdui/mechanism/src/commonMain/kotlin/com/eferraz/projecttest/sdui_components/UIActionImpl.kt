@@ -1,6 +1,7 @@
 package com.eferraz.projecttest.sdui_components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import com.eferraz.projecttest.sdui_domain.UIChangePage
 import com.eferraz.projecttest.sdui_mechanism.SDUIScreenScope
 import com.eferraz.projecttest.sdui_mechanism.models.UIActionImpl
 import kotlinx.coroutines.launch
