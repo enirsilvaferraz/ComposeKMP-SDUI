@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.ksp)
 }
 
 kotlin {
@@ -50,8 +51,16 @@ kotlin {
             implementation(project.dependencies.platform(libs.koin.bom))
             implementation(libs.bundles.koin)
 
+            implementation(project.dependencies.platform(libs.koin.annotations.bom))
+            api(libs.koin.annotations)
+
             implementation(project.dependencies.platform(libs.coil.bom))
             implementation(libs.bundles.coil)
+        }
+
+        // KSP Common sourceSet
+        sourceSets.named("commonMain").configure {
+            kotlin.srcDir("build/generated/ksp/metadata/commonMain/kotlin")
         }
     }
 }
@@ -77,4 +86,13 @@ android {
     dependencies {
         debugImplementation(compose.uiTooling)
     }
+}
+
+// KSP Tasks
+dependencies {
+    add("kspCommonMainMetadata", libs.koin.ksp.compiler)
+    add("kspAndroid", libs.koin.ksp.compiler)
+    add("kspIosX64", libs.koin.ksp.compiler)
+    add("kspIosArm64", libs.koin.ksp.compiler)
+    add("kspIosSimulatorArm64", libs.koin.ksp.compiler)
 }

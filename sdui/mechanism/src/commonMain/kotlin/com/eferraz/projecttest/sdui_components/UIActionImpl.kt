@@ -4,6 +4,7 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import com.eferraz.projecttest.sdui_mechanism.SDUIScreenScope
 import com.eferraz.projecttest.sdui_mechanism.models.UIActionImpl
 import kotlinx.coroutines.launch
+//import org.koin.core.annotation.Factory
 
 
 //internal class UINavigationBehavior : UIActionBehavior<UINavigation>() {
@@ -12,6 +13,7 @@ import kotlinx.coroutines.launch
 //    }
 //}
 
+//@Factory
 internal class UIChangePageImpl : UIActionImpl<UIChangePage>() {
 
     @OptIn(ExperimentalFoundationApi::class)
