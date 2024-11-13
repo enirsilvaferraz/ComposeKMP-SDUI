@@ -16,6 +16,7 @@ import com.eferraz.projecttest.sdui_mechanism.models.UIComponentImpl
 import com.eferraz.projecttest.sdui_mechanism.models.UIElement
 import com.eferraz.projecttest.sdui_mechanism.models.UIModifier
 import com.eferraz.projecttest.sdui_mechanism.models.UIModifierImpl
+import com.eferraz.projecttest.sdui_mechanism.models.UIScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.InternalSerializationApi
@@ -34,39 +35,6 @@ class SDUIScreenScope @OptIn(ExperimentalFoundationApi::class) private construct
     val pagerState: MutableState<PagerState?>,
     val coroutineScope: CoroutineScope,
 ) : KoinComponent {
-
-    /**
-     * Method to handle an [UIComponent] element implementation.
-     */
-    @Composable
-    inline fun <reified Component : UIComponent> Component.build() =
-        with(get<UIComponentImpl<Component>>(named(this.serial()))) {
-            build(component = this@build, modifier = this@build.modifier.build())
-        }
-
-    /**
-     * Method to handle an [UIAction] element implementation.
-     */
-    inline fun <reified Action : UIAction> Action.build() =
-        with(get<UIActionImpl<Action>>(named(this.serial()))) {
-            build(action = this@build)
-        }
-
-    /**
-     * Method to handle an [UIModifier] element implementation.
-     */
-    inline fun <reified Modifier : UIModifier> List<Modifier>.build(): androidx.compose.ui.Modifier {
-
-        var modifier: androidx.compose.ui.Modifier = Modifier
-
-        this.forEach { itModifier ->
-            with(get<UIModifierImpl<Modifier>>(named(itModifier.serial()))) {
-                modifier = modifier.build(modifier = itModifier)
-            }
-        }
-
-        return modifier
-    }
 
     companion object {
 
@@ -87,8 +55,44 @@ class SDUIScreenScope @OptIn(ExperimentalFoundationApi::class) private construct
     }
 }
 
-/**
- * @return the serialization name of an [UIElement] described by [SerialName] annotation.
- */
-@OptIn(ExperimentalSerializationApi::class, InternalSerializationApi::class)
-inline fun <reified Element : UIElement> Element.serial(): String = this::class.serializer().descriptor.serialName
+object SDUIScope : KoinComponent {
+
+    /**
+     * Method to handle an [UIComponent] element implementation.
+     */
+    @Composable
+    inline fun <reified Component : UIComponent, Scope : UIScope> Component.build(scope: Scope) =
+        with(get<UIComponentImpl<Component, Scope>>(named(this@build.serial()))) {
+            scope.build(component = this@build, modifier = this@build.modifier.build())
+        }
+
+    /**
+     * Method to handle an [UIAction] element implementation.
+     */
+    inline fun <reified Action : UIAction, Scope : UIScope> Action.build(scope: Scope) =
+        with(get<UIActionImpl<Action, Scope>>(named(this@build.serial()))) {
+            scope.build(action = this@build)
+        }
+
+    /**
+     * Method to handle an [UIModifier] element implementation.
+     */
+    inline fun <reified Modifier : UIModifier> List<Modifier>.build(): androidx.compose.ui.Modifier {
+
+        var modifier: androidx.compose.ui.Modifier = Modifier
+
+        this.forEach { itModifier ->
+            with(get<UIModifierImpl<Modifier>>(named(itModifier.serial()))) {
+                modifier = modifier.build(modifier = itModifier)
+            }
+        }
+
+        return modifier
+    }
+
+    /**
+     * @return the serialization name of an [UIElement] described by [SerialName] annotation.
+     */
+    @OptIn(ExperimentalSerializationApi::class, InternalSerializationApi::class)
+    inline fun <reified Element : UIElement> Element.serial(): String = this::class.serializer().descriptor.serialName
+}

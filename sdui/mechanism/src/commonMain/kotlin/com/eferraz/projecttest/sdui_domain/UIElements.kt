@@ -8,12 +8,12 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-@SerialName("ui-component-scafold")
+@SerialName("ui-component-scaffold")
 data class UIScaffold(
     override val modifier: List<UIModifier> = listOf(),
     val topBar: UIComponent? = null,
     val content: UIComponent,
-    val bottonBar: UIComponent? = null,
+    val bottomBar: UIComponent? = null,
 ) : UIComponent()
 
 @Serializable
@@ -52,15 +52,18 @@ data class UIIcon(
 ) : UIComponent()
 
 @Serializable
-@SerialName("ui-component-botton-bar")
+@SerialName("ui-component-bottom-bar")
 data class UIBottomBar(
     override val modifier: List<UIModifier> = listOf(),
-    val content: List<Item>,
-) : UIComponent() {
+    val content: List<UIBottomNavigationItem>,
+) : UIComponent()
 
-    @Serializable
-    data class Item(val icon: UIIcon, val label: UIComponent, val onClick: UIAction)
-}
+@Serializable
+@SerialName("ui-component-bottom-navigation-item")
+data class UIBottomNavigationItem(
+    override val modifier: List<UIModifier> = listOf(),
+    val icon: UIIcon, val label: UIComponent, val onClick: UIAction
+) : UIComponent()
 
 @Serializable
 @SerialName("ui-component-horizontal-pager")
@@ -92,6 +95,22 @@ data class UIImage(
     val url: String?,
     val contentDescription: String,
 ) : UIComponent()
+
+@Serializable
+@SerialName("ui-component-nav-host")
+data class UINavHost(
+    override val modifier: List<UIModifier> = listOf(),
+    val pages: List<Pages>,
+) : UIComponent() {
+
+    @Serializable
+    @SerialName("ui-component-nav-host-pages")
+    data class Pages(
+        override val modifier: List<UIModifier> = listOf(),
+        val route: String,
+        val pages: UIComponent,
+    ) : UIComponent()
+}
 
 
 

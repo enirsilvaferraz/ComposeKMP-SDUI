@@ -4,16 +4,16 @@ import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.intl.Locale
 import com.eferraz.projecttest.backend.models.Pokemon
 import com.eferraz.projecttest.backend.repository.PokemonRepository
+import com.eferraz.projecttest.sdui_domain.UIFillMaxWidth
 import com.eferraz.projecttest.sdui_domain.UIImage
 import com.eferraz.projecttest.sdui_domain.UILazyColumn
+import com.eferraz.projecttest.sdui_domain.UIPadding
 import com.eferraz.projecttest.sdui_domain.UIRow
 import com.eferraz.projecttest.sdui_domain.UIScaffold
+import com.eferraz.projecttest.sdui_domain.UISize
 import com.eferraz.projecttest.sdui_domain.UIText
 import com.eferraz.projecttest.sdui_domain.UITopBar
 import com.eferraz.projecttest.sdui_mechanism.models.UIComponent
-import com.eferraz.projecttest.sdui_domain.UIFillMaxWidth
-import com.eferraz.projecttest.sdui_domain.UIPadding
-import com.eferraz.projecttest.sdui_domain.UISize
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
@@ -48,7 +48,8 @@ private fun Pokemon.itemList() = UIRow(
             contentDescription = name,
             modifier = listOf(
                 UIPadding(horizontal = 24),
-                UISize(60)
+                UISize(60),
+//                UIClickable(onClick = listOf(UINavigate(deeplink = "pokemon/$id")))
             )
         ),
         UIText(

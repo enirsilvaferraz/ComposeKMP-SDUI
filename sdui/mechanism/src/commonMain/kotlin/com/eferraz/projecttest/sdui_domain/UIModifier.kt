@@ -1,5 +1,6 @@
 package com.eferraz.projecttest.sdui_domain
 
+import com.eferraz.projecttest.sdui_mechanism.models.UIAction
 import com.eferraz.projecttest.sdui_mechanism.models.UIModifier
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -45,4 +46,13 @@ data object UIFillMaxWidth : UIModifier()
 @SerialName("ui-modifier-background")
 data class UIBackground(
     val color: Long,
+) : UIModifier()
+
+/**
+ * Represents the configuration [androidx.compose.foundation.clickable] of [androidx.compose.ui.Modifier].
+ */
+@Serializable
+@SerialName("ui-modifier-clickable")
+data class UIClickable(
+    val onClick: List<UIAction>,
 ) : UIModifier()

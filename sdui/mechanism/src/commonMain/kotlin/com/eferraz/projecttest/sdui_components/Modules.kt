@@ -17,7 +17,7 @@ val componentModule = module {
     registerComponent(UIRowComponentImpl())
     registerComponent(UIImageComponentImpl())
 
-//    registerComponent(UINavigation::class, UINavigationBehavior())
+    registerAction(UINavigateImpl())
     registerAction(UIChangePageImpl())
 
     registerModifier(UIPaddingImpl())

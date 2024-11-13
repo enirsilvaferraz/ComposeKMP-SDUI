@@ -8,6 +8,7 @@ import com.eferraz.projecttest.sdui_mechanism.models.UIComponentImpl
 import com.eferraz.projecttest.sdui_mechanism.models.UIElement
 import com.eferraz.projecttest.sdui_mechanism.models.UIModifier
 import com.eferraz.projecttest.sdui_mechanism.models.UIModifierImpl
+import com.eferraz.projecttest.sdui_mechanism.models.UIScope
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.modules.SerializersModule
@@ -25,7 +26,7 @@ import kotlin.reflect.KClass
  * @param impl A implementação do elemento a ser registrada.
  */
 @OptIn(InternalSerializationApi::class, ExperimentalSerializationApi::class)
-inline fun <reified Element : UIComponent> Module.registerComponent(impl: UIComponentImpl<Element>) {
+inline fun <reified Element : UIComponent, reified Scope: UIScope> Module.registerComponent(impl: UIComponentImpl<Element, Scope>) {
 
     val name = Element::class.serializer().descriptor.serialName
     factory(named(name)) { impl } bind UIComponentImpl::class
@@ -38,7 +39,7 @@ inline fun <reified Element : UIComponent> Module.registerComponent(impl: UIComp
  * @param impl A implementação do elemento a ser registrada.
  */
 @OptIn(InternalSerializationApi::class, ExperimentalSerializationApi::class)
-inline fun <reified Element : UIAction> Module.registerAction(impl: UIActionImpl<Element>) {
+inline fun <reified Element : UIAction, reified Scope: UIScope> Module.registerAction(impl: UIActionImpl<Element, Scope>) {
 
     val name = Element::class.serializer().descriptor.serialName
     factory(named(name)) { impl } bind UIActionImpl::class

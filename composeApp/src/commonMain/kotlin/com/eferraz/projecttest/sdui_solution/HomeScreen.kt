@@ -9,19 +9,21 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.eferraz.projecttest.sdui_mechanism.SDUIScope.build
 import com.eferraz.projecttest.sdui_mechanism.SDUIScreenScope
+import com.eferraz.projecttest.sdui_mechanism.models.UIAnyScope
 import com.eferraz.projecttest.sdui_solution.SDUIViewModel.ScreenState
 import org.koin.compose.viewmodel.koinViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun DefaultScreen(
-    vm: SDUIViewModel = koinViewModel()
+    vm: SDUIViewModel = koinViewModel(),
 ) {
 
     val state by vm.state.collectAsState()
 
-    with(SDUIScreenScope.build()) {
+    with(UIAnyScope(SDUIScreenScope.build())) {
         when (state) {
             ScreenState.Loading -> LoadingScreen()
             is ScreenState.Success -> SuccessScreen(state as ScreenState.Success)
@@ -30,7 +32,7 @@ internal fun DefaultScreen(
 }
 
 @Composable
-private fun SDUIScreenScope.LoadingScreen() {
+private fun UIAnyScope.LoadingScreen() {
 
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -41,8 +43,8 @@ private fun SDUIScreenScope.LoadingScreen() {
 }
 
 @Composable
-private fun SDUIScreenScope.SuccessScreen(
-    state: ScreenState.Success
+private fun UIAnyScope.SuccessScreen(
+    state: ScreenState.Success,
 ) {
-    state.screen.build()
+    state.screen.build(this)
 }
