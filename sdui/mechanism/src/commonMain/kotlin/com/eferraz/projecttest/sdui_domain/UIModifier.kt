@@ -1,14 +1,8 @@
 package com.eferraz.projecttest.sdui_domain
 
-import com.eferraz.projecttest.sdui_mechanism.models.UIModifierAbs
+import com.eferraz.projecttest.sdui_mechanism.models.UIModifier
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-
-/**
- * Represents the base configuration of [androidx.compose.ui.Modifier].
- */
-@Serializable
-sealed class UIModifier : UIModifierAbs
 
 /**
  * Represents the configuration [androidx.compose.foundation.layout.padding] of [androidx.compose.ui.Modifier].

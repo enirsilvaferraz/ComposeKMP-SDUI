@@ -1,26 +1,27 @@
 package com.eferraz.projecttest.sdui_components
 
-import com.eferraz.projecttest.sdui_mechanism.registerElement
-//import org.koin.core.annotation.ComponentScan
-//import org.koin.core.annotation.Module
+import com.eferraz.projecttest.sdui_mechanism.registerAction
+import com.eferraz.projecttest.sdui_mechanism.registerComponent
+import com.eferraz.projecttest.sdui_mechanism.registerModifier
 import org.koin.dsl.module
 
 val componentModule = module {
 
-    registerElement(UIScaffoldComponentImpl())
-    registerElement(UITextComponentImpl())
-    registerElement(UITopBarComponentImpl())
-    registerElement(UILazyColumnComponentImpl())
-    registerElement(UIIconComponentImpl())
-    registerElement(UIBottomBarComponentImpl())
-    registerElement(UIHorizontalPagerComponentImpl())
-    registerElement(UIRowComponentImpl())
-    registerElement(UIImageComponentImpl())
+    registerComponent(UIScaffoldComponentImpl())
+    registerComponent(UITextComponentImpl())
+    registerComponent(UITopBarComponentImpl())
+    registerComponent(UILazyColumnComponentImpl())
+    registerComponent(UIIconComponentImpl())
+    registerComponent(UIBottomBarComponentImpl())
+    registerComponent(UIHorizontalPagerComponentImpl())
+    registerComponent(UIRowComponentImpl())
+    registerComponent(UIImageComponentImpl())
 
 //    registerComponent(UINavigation::class, UINavigationBehavior())
-    registerElement(UIChangePageImpl())
-}
+    registerAction(UIChangePageImpl())
 
-//@Module
-//@ComponentScan("com.eferraz.projecttest.sdui_components")
-//class KoinM
+    registerModifier(UIPaddingImpl())
+    registerModifier(UISizeImpl())
+    registerModifier(UIBackgroundImpl())
+    registerModifier(UIFillMaxWidthImpl())
+}

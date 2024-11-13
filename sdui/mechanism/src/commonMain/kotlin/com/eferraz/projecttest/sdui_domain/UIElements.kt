@@ -3,6 +3,7 @@ package com.eferraz.projecttest.sdui_domain
 import androidx.compose.ui.Alignment
 import com.eferraz.projecttest.sdui_mechanism.models.UIAction
 import com.eferraz.projecttest.sdui_mechanism.models.UIComponent
+import com.eferraz.projecttest.sdui_mechanism.models.UIModifier
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

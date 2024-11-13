@@ -14,7 +14,7 @@ abstract class UIElement
  */
 @Serializable
 abstract class UIComponent : UIElement() {
-    abstract val modifier: List<UIModifierAbs>
+    abstract val modifier: List<UIModifier>
 }
 
 /**
@@ -23,3 +23,9 @@ abstract class UIComponent : UIElement() {
  */
 @Serializable
 abstract class UIAction : UIElement()
+
+/**
+ * Represents the base configuration of [androidx.compose.ui.Modifier].
+ */
+@Serializable
+abstract class UIModifier : UIElement()
