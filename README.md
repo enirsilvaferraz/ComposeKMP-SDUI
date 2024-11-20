@@ -153,7 +153,7 @@ Para isso, devemos:
 - Reutilizar essa mesma tela ao navegar por deeplink para outras features.
 
 
-<BR><BR><BR><BR><BR><BR><BR><BR><BR> WIP <BR><BR><BR>
+<BR><BR>
 
 # Arquitetura
 
@@ -161,7 +161,7 @@ Para isso, devemos:
 
 Requisitos:
 - Deserializar a resposta do servidor em objetos Kotlin
-- Consultar o catálogo de elementos (categorizados em Componentes, Ações, Estilos)
+- Consultar o catálogo de elementos (categorizados em Componentes, Ações e Estilos)
 - Renderizar a tela de acordo com o catálogo
 
 ### Deserialização do JSON em objetos Kotlin
@@ -175,11 +175,6 @@ Por que usar Kotlin Serialization?
 * *Multiplataforma*: Pode ser usado em diferentes plataformas, como Android, JVM, JavaScript e Native.
 
 
-
-
-### Definição dos objetos Kotlin
-
-A partir daqui, vamos começar a definir a camada de domínio do Framework SDUI. No primeiro momento, 
 
 
 
