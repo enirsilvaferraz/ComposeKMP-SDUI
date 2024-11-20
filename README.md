@@ -1,8 +1,10 @@
 # Framework Server Driven UI em Compose Multiplataforma para Aplicativos Android e iOS.
 
-Neste experimento, pretendo testar o Compose Multiplataforma (CMP), uma tecnologia de desenvolvimento baseada em Kotlin (KMP) e Compose (utilizado para desenvolver interfaces de usuário para aplicativos Android). Além disso, pretendo aplicar a abordagem Server Driven UI (SDUI) para a construção de telas. 
+Neste experimento, pretendo testar o Compose Multiplataforma (CMP), uma tecnologia de desenvolvimento baseada em Kotlin (KMP) e Jetpack Compose (utilizado para desenvolver interfaces de usuário para aplicativos Android). Além disso, pretendo aplicar a abordagem Server Driven UI (SDUI) para a construção de telas. 
 
 # Introdução
+
+Iniciaremos esse projeto explicando de forma superficial o funcionamento da abordagem SDUI.
 
 ## Server Driven UI (SDUI)
 
@@ -12,7 +14,7 @@ Já o aplicativo, conterá somente um catálogo de componentes visuais, ações 
 
 Na prática, o aplicativo faz uma requisição ao servidor para construir uma tela. O servidor por sua vez, processa a requisição consultando todos os micro-serviços necessários, estrutura a tela e envia uma resposta no formato JSON (normalmente). O aplicativo interpreta essa resposta, transforma os dados do JSON em componentes visuais (que foram especificados em um catálogo de componentes) e renderiza a tela.
 
-É de suma importância que o contrato entre o servidor e o aplicativo seja bem definido, de forma que o servidor envie somente dados que o aplicativo consiga processar.
+> É de suma importância que o contrato entre o servidor e o aplicativo seja bem definido, de forma que o servidor envie somente dados que o aplicativo consiga processar.
 
 Abaixo segue exemplo de uma resposta do servidor para uma tela construída com SDUI. O JSON pode ser configurado da maneira que desejar, usei essa esta estrutura pois combina com as ferramentas que irei apresentar mais a diante.
 
@@ -39,7 +41,7 @@ Abaixo segue exemplo de uma resposta do servidor para uma tela construída com S
   "bottom": []
 }
 ```
-Onde o`type` corresponde ao identificador do componente e as propriedades restantes representam os dados passados para o componente, podendo ser texto, número ou mesmo uma lista de componentes.
+Onde o`type` corresponde ao identificador do componente e as propriedades restantes representam os dados passados para o componente, podendo ser texto, número ou mesmo uma lista de outros componentes.
 
 Com SDUI, a interface pode ser rapidamente atualizada e personalizada, pois as mudanças são feitas no servidor e refletidas instantaneamente no aplicativo sem a necessidade de atualização via lojas de aplicativos. Isso proporciona flexibilidade, permite uma personalização dinâmica, reduz o tamanho do aplicativo e separa a lógica de negócios da apresentação, garantindo consistência entre diferentes plataformas.
 
@@ -47,6 +49,10 @@ Com SDUI, a interface pode ser rapidamente atualizada e personalizada, pois as m
 # Estratégia de Desenvolvimento e Organização do Projeto
 
 Vamos dividir a implementação do Framework em 3 partes para simplificar o desenvolvimento e separar as responsabilidades.
+
+1. Mecanismo
+2. Catálogo
+3. Solução
 
 ## Mecanismo
 
@@ -58,22 +64,32 @@ Um Framework simples de SDUI precisa ser capaz de realizar duas tarefas principa
 
 O mecanismo pode conter outras funções como permissionamento, controle de versão, entre outras coisas que não vão ser abordadas agora.
 
+### Domínio
+
 É responsabilidade do mecanismo definir o domínio da aplicação. A ideia aqui é desenvolver o mecanismo de forma mais genérica possível e para isso vamos definir uma superclasse de domínio chamada `UIElement`. Dessa forma, todos os nós do JSON serão considerados UIElements.
 
-Os sub tipos do domínio UIElement são divididos em 3 grupos:
-- Os *Componentes*, que representam todos os elementos renderizáveis, como botões, textos, imagens, etc. Em linhas gerais são todos os componentes com escopo Compose, ou seja, anotados com `@Composable`. Vamos chamá-los de `UIComponent`s.
-- As *Ações*, que representam os comportamentos que a tela pode possuir, como navegar ao tocar em um elemento, abrir uma tela, enviar dados do formulário, etc. Elas serão chamadas no contexto "não-composable" como no onClick de um Button. Vamos chamá-los de `UIActio`s.
-- Os *Estilos*, que representam a aparência dos elementos, como cor, tamanho, espaçamento, etc. Vamos seguir as definições dos `Modifier`s do Compose para configurar os estilos dos componentes. Vamos chamá-los de `UIModifier`s.
+```kotlin
+/**
+ * Classe base para todos os elementos do SDUI.
+ */
+@Serializable
+abstract class UIElement
+```
 
-A definição dos três grupos de domínio é importante devido a implementação ser diferente para cada um deles. Ex.: A implementação de UIComponent deve possuir um método composable para renderizar os componentes, enquanto, a implementação de UIAction não pode possuir, assim como a implementação de UIModifier precisa conter o escopo de Modifier do Compose.
+Os sub tipos do domínio UIElement são divididos em 3 grupos:
+- Os **Componentes**, que representam todos os elementos renderizáveis, como botões, textos, imagens, etc. Em linhas gerais, são todos os componentes com escopo Composable, ou seja, anotados com `@Composable`. Vamos chamá-los de `UIComponent`s.
+- As **Ações**, que representam os comportamentos que a tela pode possuir, como navegar ao tocar em um elemento, abrir uma tela, enviar dados do formulário, etc. Elas serão chamadas no contexto "não-composable" como no lambda onClick de um Button. Vamos chamá-los de `UIAction`s.
+- Os **Estilos**, que representam a aparência dos elementos, como cor, tamanho, espaçamento, etc. Vamos seguir as definições dos `Modifier`s do Compose para configurar os estilos dos componentes. Vamos chamá-los de `UIModifier`s.
+
+A definição dos três grupos de domínio é importante devido a implementação ser diferente para cada um deles. Ex.: A implementação de UIComponent deve possuir um método composable para renderizar os componentes, enquanto a implementação de UIAction precisa ser processada fora do contexto Composable, assim como a implementação de UIModifier precisa conter o escopo de Modifier do Compose.
 
 ## Catálogo
 
-O catálogo conterá todos os elementos visuais, ações e estilos que serão mapeados pelo servidor. É aqui que vamos definir os sub tipos e fazer a implementação dos três grupos do domínio especificados no mecanismo. 
+O catálogo conterá todos os elementos visuais, ações e estilos que serão mapeados pelo servidor. É aqui que vamos definir os sub tipos do domínio e fazer a implementação dos três grupos especificados no mecanismo. 
 
 ### Sub Tipos do domínio
 
-Os Sub Tipos serão `data class`s que servirão de contrato entre o servidor e o aplicativo, possuindo assim, todos os dados necessários para construir os elementos visuais.
+Os Sub Tipos serão do tipo `data class` que servirão de contrato entre o servidor e o aplicativo, possuindo assim, todos os dados necessários para construir os elementos visuais.
 
 Exemplo de sub tipos dos domínios:
 - UIComponent -> UIButton, UIText, UIAppBar, UIScaffold, etc.
@@ -110,10 +126,10 @@ data class UIText(val text: String) : UIComponent()
 
 Implementação do Sub Tipo
 ```kotlin
-internal class UITextComponentImpl : UIComponentImpl<UIText, UIAnyScope>() {
+internal class UITextImpl : UIComponentImpl<UIText>() {
 
     @Composable
-    override fun UIAnyScope.build(modifier: Modifier, component: UIText) {
+    override fun build(modifier: Modifier, component: UIText) {
 
         Text(
             modifier = modifier,
@@ -127,13 +143,17 @@ internal class UITextComponentImpl : UIComponentImpl<UIText, UIAnyScope>() {
 
 A solução é algo mais abrangente, é aqui que vamos deixar o Framework pronto para uso sem a necessidade de implementar a solução em várias telas. A ideia é construir algo totalmente genérico que possa ser reutilizado a medida que outras telas vão surgindo.
 
-Temos um único e primordial requisito "O aplicativo precisa receber novas features sem a necessidade de atualização nas Lojas Oficiais.". Para isso, devemos:
+Temos um único e primordial requisito: 
+
+> "O aplicativo precisa receber novas features sem a necessidade de atualização nas Lojas Oficiais.". 
+ 
+Para isso, devemos:
 - Construir uma tela que receba como parâmetro o nome da feature que deseja exibir.
 - Usar esse parâmetro para buscar a especificação da tela no backend/servidor.
 - Reutilizar essa mesma tela ao navegar por deeplink para outras features.
 
 
-<BR><BR><BR><BR><BR><BR><BR><BR><BR>
+<BR><BR><BR><BR><BR><BR><BR><BR><BR> WIP <BR><BR><BR>
 
 # Arquitetura
 
