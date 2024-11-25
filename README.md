@@ -2,6 +2,8 @@
 
 Neste experimento, pretendo testar o Compose Multiplataforma (CMP), uma tecnologia de desenvolvimento baseada em Kotlin (KMP) e Jetpack Compose (utilizado para desenvolver interfaces de usuário para aplicativos Android). Além disso, pretendo aplicar a abordagem Server Driven UI (SDUI) para a construção de telas. 
 
+<BR><BR>
+
 # Introdução
 
 Iniciaremos esse projeto explicando de forma superficial o funcionamento da abordagem SDUI.
@@ -169,10 +171,10 @@ Requisitos:
 Para atender a esse primeiro requisito vamos utilizar o [Kolin Serialization](https://kotlinlang.org/docs/serialization.html) que é capaz de converter o JSON em um objeto Kotlin, que mapeará os componentes da tela.
 
 Por que usar Kotlin Serialization?
-* *Segurança de tipo*: Kotlin Serialization é integrado ao sistema de tipos do Kotlin, garantindo que os dados sejam desserializados com os tipos corretos.
-* *Conciso*: A sintaxe para definir classes serializáveis é simples e direta.
-* *Eficiente*: Kotlin Serialization é otimizado para desempenho e usa menos memória do que outras bibliotecas de serialização.
-* *Multiplataforma*: Pode ser usado em diferentes plataformas, como Android, JVM, JavaScript e Native.
+* **Segurança de tipo**: Kotlin Serialization é integrado ao sistema de tipos do Kotlin, garantindo que os dados sejam desserializados com os tipos corretos.
+* **Conciso**: A sintaxe para definir classes serializáveis é simples e direta.
+* **Eficiente**: Kotlin Serialization é otimizado para desempenho e usa menos memória do que outras bibliotecas de serialização.
+* **Multiplataforma**: Pode ser usado em diferentes plataformas, como Android, JVM, JavaScript e Native.
 
 
 

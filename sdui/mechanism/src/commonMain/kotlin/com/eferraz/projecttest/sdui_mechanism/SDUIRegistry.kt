@@ -72,7 +72,7 @@ data class SDUIPolymorphicRegister<Base: UIElement, Sub: Base>(val base: KClass<
 /**
  * Usado para recuperar as [UIElement] registradas na injeção de dependências e adicionar ao [SerializersModule] do Kotlin Serialization.
  */
-inline fun Scope.configurePolymorphism(scope: SerializersModuleBuilder) {
+fun Scope.configurePolymorphism(scope: SerializersModuleBuilder) {
     getAll<SDUIPolymorphicRegister<*,*>>().forEach {
         with(it) {
             scope.registerPolymorphism()
